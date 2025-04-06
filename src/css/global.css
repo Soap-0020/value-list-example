@@ -1,13 +1,10 @@
 * {
   padding: 0;
   margin: 0;
-  border-color: #27272a;
-  border-style: solid;
-  border-width: 0px;
 }
 
 body {
-  background-color: #08080b;
+  background-color: #1f1f1f;
 }
 
 ::-webkit-scrollbar {

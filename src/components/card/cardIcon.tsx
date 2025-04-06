@@ -27,10 +27,9 @@ const CardIcon = (data: Props) => {
       {popupShow && (
         <span
           style={{
-            backgroundColor: "#08080b",
-            borderWidth: "1px",
             backdropFilter: "blur(2px)",
             color: "rgb(191, 191, 191)",
+            backgroundColor: "rgb(48, 48, 48)",
             textAlign: "center",
             borderRadius: "4px",
             padding: "6px",
@@ -40,9 +39,23 @@ const CardIcon = (data: Props) => {
             transform: "translateX(-50%)",
             whiteSpace: "nowrap",
             fontSize: "16px",
+            display: "flex",
+            gap: "4px",
           }}
         >
-          {formatValue(data.value)}
+          <Image
+            src={data.icon}
+            alt={data.name}
+            height={25}
+            width={25}
+            style={{
+              borderRadius: "2px",
+              height: "100%",
+            }}
+          />
+          <span>
+            {data.name}: {formatValue(data.value)}
+          </span>
         </span>
       )}
       <Image

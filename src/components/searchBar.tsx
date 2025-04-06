@@ -11,14 +11,17 @@ const SearchBar = ({ value, onChange, placeholder }: Props) => {
       placeholder={placeholder}
       onChange={(data) => onChange(data.target.value)}
       style={{
-        padding: "9px",
-        width: "calc(100% - 18px)",
-        borderWidth: "1px",
-        backgroundColor: "#08080b",
-        borderRadius: "6px",
-        color: "white",
+        width: "calc(100% - 16px)",
+        flexGrow: 12,
+        padding: "8px",
         outline: "none",
-        fontSize: "16px",
+        fontSize: "17px",
+        border: "none",
+        borderRadius: "10px",
+        backgroundColor: "rgb(36, 36, 36)",
+        color: "white",
+        fontFamily: "Poppins",
+        textAlign: "center",
       }}
     />
   );

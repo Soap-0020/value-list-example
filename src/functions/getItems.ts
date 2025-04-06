@@ -16,41 +16,48 @@ const getItems = async (): Promise<Item[]> => {
   );
   const json = await data.json();
 
-  return json.dataItems.map(
-    ({ data }: { data: any }) =>
-      ({
-        name: data.title,
-        image: data.imageLink,
-        id: data.title,
+  return json.dataItems.map(({ data }: { data: any }) => {
+    const demand = parseInt(data.demand.split("/")[0]);
 
-        // They don't provide history data
-        history: [],
-        smallDetails: {
-          Damage: {
-            icon: "https://static.wixstatic.com/media/595de3_794717b6ab2c44568dbcd9e42ea6448e~mv2.png/v1/fill/w_28,h_28,al_c,lg_1,q_85,enc_avif,quality_auto/595de3_794717b6ab2c44568dbcd9e42ea6448e~mv2.png",
-            value: parseInt(data.dmg),
-          },
-          Range: {
-            icon: "https://static.wixstatic.com/media/595de3_4400bb3cce2a41259646e458676b3175~mv2.png/v1/fill/w_28,h_28,al_c,lg_1,q_85,enc_avif,quality_auto/RANGE.png",
-            value: parseInt(data.rng),
-          },
-          SPA: {
-            icon: "https://static.wixstatic.com/media/595de3_cd45b9ddcf8c4f729090fd4c32681f9f~mv2.png/v1/fill/w_28,h_28,al_c,lg_1,q_85,enc_avif,quality_auto/595de3_cd45b9ddcf8c4f729090fd4c32681f9f~mv2.png",
-            value: parseInt(data.spa),
-          },
+    return {
+      name: data.title,
+      image: data.imageLink,
+      id: data.title,
+
+      // They don't provide history data
+      history: [],
+      smallDetails: {
+        Damage: {
+          icon: "https://static.wixstatic.com/media/595de3_794717b6ab2c44568dbcd9e42ea6448e~mv2.png/v1/fill/w_28,h_28,al_c,lg_1,q_85,enc_avif,quality_auto/595de3_794717b6ab2c44568dbcd9e42ea6448e~mv2.png",
+          value: parseInt(data.dmg),
         },
-        mainDetails: {
-          Value: {
-            icon: "https://imgs.search.brave.com/LT196aY4yBnB2ZisrjaMgcFil-clVoGMPsROHyPkUDs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pY29u/cy5pY29uYXJjaGl2/ZS5jb20vaWNvbnMv/bWljcm9zb2Z0L2Zs/dWVudHVpLWVtb2pp/LTNkLzEyOC9HZW0t/U3RvbmUtM2QtaWNv/bi5wbmc",
-            value: data.value1,
-          },
-          Demand: {
-            icon: "https://imgs.search.brave.com/E6qcy8WRdkOC4pMpdBqfYL7qXn5wmida3W1X_q2rG24/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jbHVi/LmdvbGRzdGVyLmNv/LnVrL2ltYWdlcy9v/bkRlbWFuZC1pY29u/cy9pLWJsdWUtc2Vh/cmNoLnN2Zw",
-            value: parseInt(data.demand.split("/")[0]) + "/10",
-          },
+        Range: {
+          icon: "https://static.wixstatic.com/media/595de3_4400bb3cce2a41259646e458676b3175~mv2.png/v1/fill/w_28,h_28,al_c,lg_1,q_85,enc_avif,quality_auto/RANGE.png",
+          value: parseInt(data.rng),
         },
-      } satisfies Item)
-  );
+        SPA: {
+          icon: "https://static.wixstatic.com/media/595de3_cd45b9ddcf8c4f729090fd4c32681f9f~mv2.png/v1/fill/w_28,h_28,al_c,lg_1,q_85,enc_avif,quality_auto/595de3_cd45b9ddcf8c4f729090fd4c32681f9f~mv2.png",
+          value: parseInt(data.spa),
+        },
+      },
+      mainDetails: {
+        Value: {
+          icon: "https://imgs.search.brave.com/LT196aY4yBnB2ZisrjaMgcFil-clVoGMPsROHyPkUDs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pY29u/cy5pY29uYXJjaGl2/ZS5jb20vaWNvbnMv/bWljcm9zb2Z0L2Zs/dWVudHVpLWVtb2pp/LTNkLzEyOC9HZW0t/U3RvbmUtM2QtaWNv/bi5wbmc",
+          value: data.value1,
+        },
+        Demand: {
+          icon:
+            demand > 6
+              ? "https://media.discordapp.net/attachments/881209898325655624/1358483821556662423/image.png?ex=67f40226&is=67f2b0a6&hm=441d049218bc01f6d6f672c776503c237332beb175e284355b8b884db064ef5d&=&format=webp&quality=lossless"
+              : demand > 5
+              ? "https://media.discordapp.net/attachments/881209898325655624/1358475865700434062/image.png?ex=67f3fabd&is=67f2a93d&hm=88fba9eb7598ba0cdba84186de5397c235aea996300ac18c699c23e070e8d33f&=&format=webp&quality=lossless"
+              : "https://media.discordapp.net/attachments/881209898325655624/1358483960518410411/image.png?ex=67f40247&is=67f2b0c7&hm=cbdbe9b816811266964857db703e119db18edada5f1f96c0d092495f33bbb966&=&format=webp&quality=lossless",
+
+          value: demand + "/10",
+        },
+      },
+    } satisfies Item;
+  });
 };
 
 // Update cache every 300 seconds (5 mins)

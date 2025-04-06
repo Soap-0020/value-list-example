@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "*",
+        hostname: "*", // Make sure to edit this value.
       },
     ],
   },

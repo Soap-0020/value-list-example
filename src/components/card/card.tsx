@@ -20,14 +20,14 @@ const Card = ({ item }: Props) => {
         padding: "12px",
         flexGrow: "1",
         gap: "10px",
-        borderWidth: "1px",
         position: "relative",
         color: "rgb(191, 191, 191)",
+        backgroundColor: "rgb(36, 36, 36)",
       }}
     >
       <div
         style={{
-          backgroundColor: "rgb(8, 8, 11, 0.6)",
+          backgroundColor: "rgb(48, 48, 48, 0.65)",
           backdropFilter: "blur(6px)",
           padding: "6px",
           borderRadius: "6px",
@@ -39,7 +39,6 @@ const Card = ({ item }: Props) => {
           position: "absolute",
           top: 0,
           right: 0,
-          borderWidth: "1.5px",
         }}
       >
         {Object.entries(item.smallDetails).map(([name, details]) => (
@@ -54,7 +53,7 @@ const Card = ({ item }: Props) => {
 
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Image
-          alt={item.name + "'s Image"}
+          alt={item.name}
           height={100}
           width={100}
           src={item.image}
@@ -111,9 +110,9 @@ const Card = ({ item }: Props) => {
           fontWeight: "500",
           cursor: "pointer",
           color: "rgb(191, 191, 191)",
+          backgroundColor: "rgb(48, 48, 48, 0.65)",
           textAlign: "center",
           textDecoration: "none",
-          borderWidth: "1px",
         }}
         prefetch
       >
