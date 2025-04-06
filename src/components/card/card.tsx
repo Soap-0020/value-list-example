@@ -17,28 +17,29 @@ const Card = ({ item }: Props) => {
         borderRadius: "10px",
         display: "flex",
         flexDirection: "column",
-        padding: "18px",
+        padding: "12px",
         flexGrow: "1",
         gap: "10px",
-        backgroundColor: "rgb(36, 36, 36)",
+        borderWidth: "1px",
         position: "relative",
         color: "rgb(191, 191, 191)",
       }}
     >
       <div
         style={{
-          backgroundColor: "rgb(48, 48, 48, 0.65)",
-          backdropFilter: "blur(2px)",
+          backgroundColor: "rgb(8, 8, 11, 0.6)",
+          backdropFilter: "blur(6px)",
           padding: "6px",
           borderRadius: "6px",
           display: "flex",
-          margin: "18px",
+          margin: "12px",
           zIndex: 2,
           gap: "6px",
           flexDirection: "row",
           position: "absolute",
           top: 0,
           right: 0,
+          borderWidth: "1.5px",
         }}
       >
         {Object.entries(item.smallDetails).map(([name, details]) => (
@@ -105,14 +106,14 @@ const Card = ({ item }: Props) => {
         href={`/item/${item.id}`}
         style={{
           borderRadius: "4px",
-          fontSize: "13.4px",
-          backgroundColor: "rgb(48, 48, 48, 0.65)",
+          fontSize: "14px",
           padding: "4px",
           fontWeight: "500",
           cursor: "pointer",
           color: "rgb(191, 191, 191)",
           textAlign: "center",
           textDecoration: "none",
+          borderWidth: "1px",
         }}
         prefetch
       >

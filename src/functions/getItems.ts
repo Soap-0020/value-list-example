@@ -53,7 +53,7 @@ const getItems = async (): Promise<Item[]> => {
   );
 };
 
-// Update cache every 60 seconds
+// Update cache every 300 seconds (5 mins)
 export default unstable_cache(getItems, [], {
-  revalidate: 60,
+  revalidate: 300,
 });

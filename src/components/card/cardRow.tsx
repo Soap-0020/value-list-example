@@ -1,3 +1,4 @@
+import formatValue from "@/src/functions/formatValue";
 import Image from "next/image";
 
 type Props = {
@@ -23,7 +24,7 @@ const CardRow = ({ icon, name, value }: Props) => {
           gap: "6px",
         }}
       >
-        <p>{typeof value == "number" ? value.toLocaleString() : value}</p>
+        <p>{formatValue(value)}</p>
         <Image alt={name} width={25} height={25} src={icon} />
       </div>
     </div>

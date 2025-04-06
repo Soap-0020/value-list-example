@@ -1,5 +1,6 @@
 "use client";
 
+import formatValue from "@/src/functions/formatValue";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -26,7 +27,9 @@ const CardIcon = (data: Props) => {
       {popupShow && (
         <span
           style={{
-            backgroundColor: "rgb(48, 48, 48)",
+            backgroundColor: "#08080b",
+            borderWidth: "1px",
+            backdropFilter: "blur(2px)",
             color: "rgb(191, 191, 191)",
             textAlign: "center",
             borderRadius: "4px",
@@ -39,9 +42,7 @@ const CardIcon = (data: Props) => {
             fontSize: "16px",
           }}
         >
-          {typeof data.value == "number"
-            ? data.value.toLocaleString()
-            : data.value}
+          {formatValue(data.value)}
         </span>
       )}
       <Image

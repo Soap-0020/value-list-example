@@ -7,6 +7,7 @@ type Item = {
   name: string;
   image: string;
   id: string;
+  description?: string;
   mainDetails: { [key: string]: Detail };
   smallDetails: { [key: string]: Detail };
   history: { date: number; details: { [key: string]: Detail<number> } }[];

@@ -8,7 +8,7 @@ const CardContainer = ({ children }: Props) => {
       style={{
         display: "flex",
         justifyContent: "center",
-        gap: "10px",
+        gap: "12px",
         flexWrap: "wrap",
         overflow: "visible",
       }}
