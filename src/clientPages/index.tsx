@@ -1,12 +1,14 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import Card from "../components/card/card";
 import CardContainer from "../components/card/container";
 import Item from "../types/item";
 import SearchBar from "../components/searchBar";
-import { useRouter } from "next/navigation";
 import sortingConfig from "../config/sorting";
+import statisticsConfig from "../config/statistics";
+import formatValue from "../functions/formatValue";
+import { useState } from "react";
+import SortingConfig from "../types/sortingConfig";
 
 type Props = {
   items: Item[];
@@ -15,21 +17,12 @@ type Props = {
 // Change to show what you want.
 
 export default function ClientIndex({ items }: Props) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const search = searchParams.get("search") ?? "";
-  const sort = searchParams.get("sort") ?? "";
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState(sortingConfig[0].name);
 
-  const sortConfig =
-    sortingConfig.find((config) => config.name == sort) ?? sortingConfig[0];
-
-  const updateParams = (param: string, value: string) => {
-    const params = new URLSearchParams(searchParams);
-    params.set(param, value);
-    router.replace(`?${params.toString()}`, {
-      scroll: false,
-    });
-  };
+  const sortConfig = sortingConfig.find(
+    (config) => config.name == sort
+  ) as SortingConfig;
 
   return (
     <div
@@ -41,19 +34,24 @@ export default function ClientIndex({ items }: Props) {
       }}
     >
       <div>
+        {statisticsConfig.map((statistic) => (
+          <div key={statistic.name}>
+            <h1>{statistic.name}</h1>
+            <h2>{formatValue(statistic.getValue(items))}</h2>
+          </div>
+        ))}
+      </div>
+      <div>
         <div>
           <SearchBar
             value={search}
             placeholder="Search"
-            onChange={(value) => updateParams("search", value)}
+            onChange={(value) => setSearch(value)}
           />
         </div>
         <div>
           {sortingConfig.map((config) => (
-            <button
-              onClick={() => updateParams("sort", config.name)}
-              key={config.name}
-            >
+            <button onClick={() => setSort(config.name)} key={config.name}>
               {config.name}
             </button>
           ))}

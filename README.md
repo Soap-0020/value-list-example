@@ -16,6 +16,6 @@
 
 ## Possible Edits
 
-> change theme colors, etc
-> add new custom features/buttons/etc
-> **anything** really. This is just a template meant to be expanded upon.
+- change theme colors, etc
+- add new custom features/buttons/etc
+- **anything** really. This is just a template meant to be expanded upon.
