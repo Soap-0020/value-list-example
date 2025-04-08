@@ -8,7 +8,6 @@ import sortingConfig from "../config/sorting";
 import statisticsConfig from "../config/statistics";
 import formatValue from "../functions/formatValue";
 import { useState } from "react";
-import SortingConfig from "../types/sortingConfig";
 
 type Props = {
   items: Item[];
@@ -18,11 +17,9 @@ type Props = {
 
 export default function ClientIndex({ items }: Props) {
   const [search, setSearch] = useState("");
-  const [sort, setSort] = useState(sortingConfig[0].name);
+  const [sort, setSort] = useState(Object.keys(sortingConfig)[0]);
 
-  const sortConfig = sortingConfig.find(
-    (config) => config.name == sort
-  ) as SortingConfig;
+  const sortConfig = sortingConfig[sort];
 
   return (
     <div
@@ -34,10 +31,10 @@ export default function ClientIndex({ items }: Props) {
       }}
     >
       <div>
-        {statisticsConfig.map((statistic) => (
-          <div key={statistic.name}>
-            <h1>{statistic.name}</h1>
-            <h2>{formatValue(statistic.getValue(items))}</h2>
+        {Object.entries(statisticsConfig).map(([name, getValue]) => (
+          <div key={name}>
+            <h1>{name}</h1>
+            <h2>{formatValue(getValue(items))}</h2>
           </div>
         ))}
       </div>
@@ -50,9 +47,9 @@ export default function ClientIndex({ items }: Props) {
           />
         </div>
         <div>
-          {sortingConfig.map((config) => (
-            <button onClick={() => setSort(config.name)} key={config.name}>
-              {config.name}
+          {Object.entries(sortingConfig).map(([name]) => (
+            <button onClick={() => setSort(name)} key={name}>
+              {name}
             </button>
           ))}
         </div>

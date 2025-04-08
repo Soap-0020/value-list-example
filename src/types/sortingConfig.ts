@@ -1,11 +1,12 @@
 import Item from "./item";
 
 type SortingConfig = {
-  type: "ascending" | "descending";
-  getValue: (item: Item) => number;
+  [name: string]: {
+    type: "ascending" | "descending";
+    getValue: (item: Item) => number;
 
-  icon: string;
-  name: string;
+    icon: string;
+  };
 };
 
 export default SortingConfig;
