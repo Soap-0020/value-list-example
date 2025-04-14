@@ -4,7 +4,6 @@ type SortingConfig = {
   [name: string]: {
     type: "ascending" | "descending";
     getValue: (item: Item) => number;
-
     icon: string;
   };
 };

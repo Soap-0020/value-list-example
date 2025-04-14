@@ -13,7 +13,9 @@ const statisticsConfig: StatisticsConfig = {
   ["Average Demand"]: (items) =>
     items
       .map((item) => parseInt(item.mainDetails.Demand.value.split("/")[0]))
-      .reduce((total, number) => total + number, 0) / items.length,
+      .reduce((total, number) => total + number, 0) /
+      items.length +
+    "/10",
 
   ["Highest Damage"]: (items) =>
     items.sort(

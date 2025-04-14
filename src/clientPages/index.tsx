@@ -6,8 +6,9 @@ import Item from "../types/item";
 import SearchBar from "../components/searchBar";
 import sortingConfig from "../config/sorting";
 import statisticsConfig from "../config/statistics";
-import formatValue from "../functions/formatValue";
 import { useState } from "react";
+import Statistic from "../components/statistic/statistic";
+import StatisticContainer from "../components/statistic/container";
 
 type Props = {
   items: Item[];
@@ -30,14 +31,11 @@ export default function ClientIndex({ items }: Props) {
         flexDirection: "column",
       }}
     >
-      <div>
+      <StatisticContainer>
         {Object.entries(statisticsConfig).map(([name, getValue]) => (
-          <div key={name}>
-            <h1>{name}</h1>
-            <h2>{formatValue(getValue(items))}</h2>
-          </div>
+          <Statistic key={name} name={name} value={getValue(items)} />
         ))}
-      </div>
+      </StatisticContainer>
       <div>
         <div>
           <SearchBar

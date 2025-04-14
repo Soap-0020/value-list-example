@@ -29,21 +29,21 @@ const getItems = async (): Promise<Item[]> => {
       smallDetails: {
         Damage: {
           icon: "https://static.wixstatic.com/media/595de3_794717b6ab2c44568dbcd9e42ea6448e~mv2.png/v1/fill/w_28,h_28,al_c,lg_1,q_85,enc_avif,quality_auto/595de3_794717b6ab2c44568dbcd9e42ea6448e~mv2.png",
-          value: parseInt(data.dmg),
+          value: Number.isNaN(parseInt(data.dmg)) ? 0 : parseInt(data.dmg),
         },
         Range: {
           icon: "https://static.wixstatic.com/media/595de3_4400bb3cce2a41259646e458676b3175~mv2.png/v1/fill/w_28,h_28,al_c,lg_1,q_85,enc_avif,quality_auto/RANGE.png",
-          value: parseInt(data.rng),
+          value: Number.isNaN(parseInt(data.rng)) ? 0 : parseInt(data.rng),
         },
         SPA: {
           icon: "https://static.wixstatic.com/media/595de3_cd45b9ddcf8c4f729090fd4c32681f9f~mv2.png/v1/fill/w_28,h_28,al_c,lg_1,q_85,enc_avif,quality_auto/595de3_cd45b9ddcf8c4f729090fd4c32681f9f~mv2.png",
-          value: parseInt(data.spa),
+          value: Number.isNaN(parseInt(data.spa)) ? 0 : parseInt(data.spa),
         },
       },
       mainDetails: {
         Value: {
           icon: "https://imgs.search.brave.com/LT196aY4yBnB2ZisrjaMgcFil-clVoGMPsROHyPkUDs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pY29u/cy5pY29uYXJjaGl2/ZS5jb20vaWNvbnMv/bWljcm9zb2Z0L2Zs/dWVudHVpLWVtb2pp/LTNkLzEyOC9HZW0t/U3RvbmUtM2QtaWNv/bi5wbmc",
-          value: data.value1,
+          value: Number.isNaN(parseInt(data.value1)) ? 0 : data.value1,
         },
         Demand: {
           icon:
