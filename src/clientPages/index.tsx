@@ -25,7 +25,7 @@ export default function ClientIndex({ items }: Props) {
   return (
     <div
       style={{
-        padding: "16px",
+        padding: "8px",
         display: "flex",
         gap: "12px",
         flexDirection: "column",
@@ -36,15 +36,15 @@ export default function ClientIndex({ items }: Props) {
           <Statistic key={name} name={name} value={getValue(items)} />
         ))}
       </StatisticContainer>
-      <div>
-        <div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+        <div style={{ flex: 7 }}>
           <SearchBar
             value={search}
             placeholder="Search"
             onChange={(value) => setSearch(value)}
           />
         </div>
-        <div>
+        <div style={{ flex: 1 }}>
           {Object.entries(sortingConfig).map(([name]) => (
             <button onClick={() => setSort(name)} key={name}>
               {name}

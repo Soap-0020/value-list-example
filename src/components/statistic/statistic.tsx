@@ -5,6 +5,8 @@ type Props = {
   name: string;
 };
 
+// WIP
+
 const Statistic = ({ value, name }: Props) => {
   return (
     <div

@@ -12,8 +12,8 @@ const Card = ({ item }: Props) => {
   return (
     <div
       style={{
-        width: "180px",
-        maxWidth: "372px",
+        width: "min(calc(50vw - 16px - 24px), 180px)",
+        maxWidth: "300px",
         borderRadius: "10px",
         display: "flex",
         flexDirection: "column",
