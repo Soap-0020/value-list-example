@@ -14,7 +14,6 @@ const Dropdown = ({ options, value, onSelect }: Props) => {
         flexGrow: 1,
         backgroundColor: "rgb(36, 36, 36)",
         border: "none",
-        color: "rgb(191, 191, 191)",
         textAlign: "center",
         cursor: "pointer",
         outline: "none",
@@ -22,6 +21,8 @@ const Dropdown = ({ options, value, onSelect }: Props) => {
         padding: "8px",
         textAlignLast: "center",
         fontFamily: "Poppins",
+        height: "42px",
+        color: "white",
       }}
     >
       {options.map((option) => (

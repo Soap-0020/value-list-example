@@ -53,7 +53,13 @@ export default function ClientIndex({ items }: Props) {
             onChange={(value) => setSearch(value)}
           />
         </div>
-        <div style={{ flex: 2, minWidth: "min(100%, 150px)", display: "flex" }}>
+        <div
+          style={{
+            flex: 2,
+            minWidth: "min(100%, 150px)",
+            display: "flex",
+          }}
+        >
           <Dropdown
             value={sort}
             onSelect={setSort}
