@@ -11,8 +11,7 @@ const SearchBar = ({ value, onChange, placeholder }: Props) => {
       placeholder={placeholder}
       onChange={(data) => onChange(data.target.value)}
       style={{
-        width: "calc(100% - 16px)",
-        flexGrow: 12,
+        flexGrow: 1,
         padding: "8px",
         outline: "none",
         fontSize: "17px",

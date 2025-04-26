@@ -9,6 +9,7 @@ import statisticsConfig from "../config/statistics";
 import { useState } from "react";
 import Statistic from "../components/statistic/statistic";
 import StatisticContainer from "../components/statistic/container";
+import Dropdown from "../components/dropdown";
 
 type Props = {
   items: Item[];
@@ -36,20 +37,28 @@ export default function ClientIndex({ items }: Props) {
           <Statistic key={name} name={name} value={getValue(items)} />
         ))}
       </StatisticContainer>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-        <div style={{ flex: 7 }}>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "12px",
+        }}
+      >
+        <div
+          style={{ flex: 12, minWidth: "min(100%, 300px)", display: "flex" }}
+        >
           <SearchBar
             value={search}
             placeholder="Search"
             onChange={(value) => setSearch(value)}
           />
         </div>
-        <div style={{ flex: 1 }}>
-          {Object.entries(sortingConfig).map(([name]) => (
-            <button onClick={() => setSort(name)} key={name}>
-              {name}
-            </button>
-          ))}
+        <div style={{ flex: 2, minWidth: "min(100%, 150px)", display: "flex" }}>
+          <Dropdown
+            value={sort}
+            onSelect={setSort}
+            options={Object.keys(sortingConfig)}
+          />
         </div>
       </div>
       <CardContainer>
