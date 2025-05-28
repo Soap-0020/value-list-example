@@ -1,6 +1,15 @@
 import { unstable_cache } from "next/cache";
 import Item from "../types/item";
 
+import swordIcon from "../public/sword.webp";
+import bowIcon from "../public/bow.webp";
+import clockIcon from "../public/clock.webp";
+import diamondIcon from "../public/diamond.webp";
+
+import greenUpArrowIcon from "../public/green-up-arrow.webp";
+import redUpArrowIcon from "../public/red-up-arrow.webp";
+import downArrowIcon from "../public/down-arrow.webp";
+
 // Edit this to implement your own way of fetching the items.
 
 const getItems = async (): Promise<Item[]> => {
@@ -17,7 +26,8 @@ const getItems = async (): Promise<Item[]> => {
   const json = await data.json();
 
   return json.dataItems.map(({ data }: { data: any }) => {
-    const demand = parseInt(data.demand.split("/")[0]);
+    const demandValue = parseInt(data.demand.split("/")[0]);
+    const demand = Number.isNaN(demandValue) ? 0 : demandValue;
 
     return {
       name: data.title,
@@ -28,30 +38,30 @@ const getItems = async (): Promise<Item[]> => {
       history: [],
       smallDetails: {
         Damage: {
-          icon: "https://static.wixstatic.com/media/595de3_794717b6ab2c44568dbcd9e42ea6448e~mv2.png/v1/fill/w_28,h_28,al_c,lg_1,q_85,enc_avif,quality_auto/595de3_794717b6ab2c44568dbcd9e42ea6448e~mv2.png",
+          icon: swordIcon,
           value: Number.isNaN(parseInt(data.dmg)) ? 0 : parseInt(data.dmg),
         },
         Range: {
-          icon: "https://static.wixstatic.com/media/595de3_4400bb3cce2a41259646e458676b3175~mv2.png/v1/fill/w_28,h_28,al_c,lg_1,q_85,enc_avif,quality_auto/RANGE.png",
+          icon: bowIcon,
           value: Number.isNaN(parseInt(data.rng)) ? 0 : parseInt(data.rng),
         },
         SPA: {
-          icon: "https://static.wixstatic.com/media/595de3_cd45b9ddcf8c4f729090fd4c32681f9f~mv2.png/v1/fill/w_28,h_28,al_c,lg_1,q_85,enc_avif,quality_auto/595de3_cd45b9ddcf8c4f729090fd4c32681f9f~mv2.png",
+          icon: clockIcon,
           value: Number.isNaN(parseInt(data.spa)) ? 0 : parseInt(data.spa),
         },
       },
       mainDetails: {
         Value: {
-          icon: "https://imgs.search.brave.com/LT196aY4yBnB2ZisrjaMgcFil-clVoGMPsROHyPkUDs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pY29u/cy5pY29uYXJjaGl2/ZS5jb20vaWNvbnMv/bWljcm9zb2Z0L2Zs/dWVudHVpLWVtb2pp/LTNkLzEyOC9HZW0t/U3RvbmUtM2QtaWNv/bi5wbmc",
+          icon: diamondIcon,
           value: Number.isNaN(parseInt(data.value1)) ? 0 : data.value1,
         },
         Demand: {
           icon:
             demand > 6
-              ? "https://media.discordapp.net/attachments/881209898325655624/1358483821556662423/image.png?ex=67f40226&is=67f2b0a6&hm=441d049218bc01f6d6f672c776503c237332beb175e284355b8b884db064ef5d&=&format=webp&quality=lossless"
+              ? greenUpArrowIcon
               : demand > 5
-              ? "https://media.discordapp.net/attachments/881209898325655624/1358475865700434062/image.png?ex=67f3fabd&is=67f2a93d&hm=88fba9eb7598ba0cdba84186de5397c235aea996300ac18c699c23e070e8d33f&=&format=webp&quality=lossless"
-              : "https://media.discordapp.net/attachments/881209898325655624/1358483960518410411/image.png?ex=67f40247&is=67f2b0c7&hm=cbdbe9b816811266964857db703e119db18edada5f1f96c0d092495f33bbb966&=&format=webp&quality=lossless",
+              ? redUpArrowIcon
+              : downArrowIcon,
 
           value: demand + "/10",
         },

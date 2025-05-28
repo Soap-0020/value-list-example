@@ -1,5 +1,7 @@
+import Icon from "./icon";
+
 type Detail<T = any> = {
-  icon: string;
+  icon: Icon;
   value: T;
 };
 

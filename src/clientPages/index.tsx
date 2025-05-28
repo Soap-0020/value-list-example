@@ -33,8 +33,8 @@ export default function ClientIndex({ items }: Props) {
       }}
     >
       <StatisticContainer>
-        {Object.entries(statisticsConfig).map(([name, getValue]) => (
-          <Statistic key={name} name={name} value={getValue(items)} />
+        {Object.entries(statisticsConfig).map(([name, data]) => (
+          <Statistic key={name} name={name} value={data.getValue(items)} />
         ))}
       </StatisticContainer>
       <div
@@ -45,7 +45,7 @@ export default function ClientIndex({ items }: Props) {
         }}
       >
         <div
-          style={{ flex: 12, minWidth: "min(100%, 300px)", display: "flex" }}
+          style={{ flex: 12, minWidth: "min(100%, 225px)", display: "flex" }}
         >
           <SearchBar
             value={search}
@@ -56,14 +56,17 @@ export default function ClientIndex({ items }: Props) {
         <div
           style={{
             flex: 2,
-            minWidth: "min(100%, 150px)",
+            minWidth: "min(100%, 225px)",
             display: "flex",
           }}
         >
           <Dropdown
             value={sort}
             onSelect={setSort}
-            options={Object.keys(sortingConfig)}
+            options={Object.entries(sortingConfig).map(([name, config]) => ({
+              icon: config.icon,
+              name,
+            }))}
           />
         </div>
       </div>
