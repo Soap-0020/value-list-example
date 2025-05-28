@@ -1,9 +1,10 @@
 import formatValue from "@/src/functions/formatValue";
+import Icon from "@/src/types/icon";
 import Image from "next/image";
 
 type Props = {
   name: string;
-  icon: string;
+  icon: Icon;
   value: any;
 };
 

@@ -1,11 +1,12 @@
 "use client";
 
 import formatValue from "@/src/functions/formatValue";
+import Icon from "@/src/types/icon";
 import Image from "next/image";
 import { useState } from "react";
 
 type Props = {
-  icon: string;
+  icon: Icon;
   value: any;
   name: string;
 };
