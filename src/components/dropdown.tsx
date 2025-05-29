@@ -46,14 +46,14 @@ const Dropdown = ({ options, value, onSelect }: Props) => {
             display: "flex",
             gap: "8px",
             alignItems: "center",
-            margin: "0 auto",
+            margin: "auto",
             justifyContent: "center",
           }}
         >
           <Image width={25} height={25} src={currentConfig.icon} alt={value} />
           <span>{value}</span>
         </div>
-        <div style={{ opacity: 0.9 }}>
+        <div style={{ opacity: 0.9, position: "absolute", right: 10 }}>
           <Image alt="Dropdown Icon" src={dropdownIcon} width={12.5} />
         </div>
       </button>

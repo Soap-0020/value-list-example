@@ -6,10 +6,12 @@ import Item from "../types/item";
 import SearchBar from "../components/searchBar";
 import sortingConfig from "../config/sorting";
 import statisticsConfig from "../config/statistics";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Statistic from "../components/statistic/statistic";
 import StatisticContainer from "../components/statistic/container";
 import Dropdown from "../components/dropdown";
+import Pagination from "../components/pagination/pagination";
+import pageSize from "../config/pageSize";
 
 type Props = {
   items: Item[];
@@ -20,8 +22,18 @@ type Props = {
 export default function ClientIndex({ items }: Props) {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState(Object.keys(sortingConfig)[0]);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    setPage(1);
+  }, [search, sort]);
 
   const sortConfig = sortingConfig[sort];
+  const filteredItems = items.filter(
+    (item) =>
+      item.name.toLowerCase().includes(search.toLowerCase()) ||
+      item.id.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div
@@ -37,6 +49,7 @@ export default function ClientIndex({ items }: Props) {
           <Statistic key={name} name={name} value={data.getValue(items)} />
         ))}
       </StatisticContainer>
+
       <div
         style={{
           display: "flex",
@@ -49,10 +62,19 @@ export default function ClientIndex({ items }: Props) {
         >
           <SearchBar
             value={search}
-            placeholder="Search"
+            placeholder="Search for items..."
             onChange={(value) => setSearch(value)}
           />
         </div>
+
+        <div style={{ flex: 2, minWidth: "min(100%, 225px)", display: "flex" }}>
+          <Pagination
+            page={page}
+            onChange={setPage}
+            maxPage={filteredItems.length / pageSize}
+          />
+        </div>
+
         <div
           style={{
             flex: 2,
@@ -71,17 +93,13 @@ export default function ClientIndex({ items }: Props) {
         </div>
       </div>
       <CardContainer>
-        {items
-          .filter(
-            (item) =>
-              item.name.toLowerCase().includes(search.toLowerCase()) ||
-              item.id.toLowerCase().includes(search.toLowerCase())
-          )
+        {filteredItems
           .sort((a, b) =>
             sortConfig.type == "ascending"
               ? sortConfig.getValue(b) - sortConfig.getValue(a)
               : sortConfig.getValue(a) - sortConfig.getValue(b)
           )
+          .splice((page - 1) * pageSize, page * pageSize)
           .map((item) => (
             <Card item={item} key={item.name} />
           ))}

@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: Poppins !important;
 }
 
 body {
@@ -13,4 +14,18 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+.paginationButton {
+  border-radius: 5px;
+}
+
+.paginationButton:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.paginationButton:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
