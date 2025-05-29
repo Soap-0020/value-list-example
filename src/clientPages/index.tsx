@@ -6,7 +6,7 @@ import Item from "../types/item";
 import SearchBar from "../components/searchBar";
 import sortingConfig from "../config/sorting";
 import statisticsConfig from "../config/statistics";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Statistic from "../components/statistic/statistic";
 import StatisticContainer from "../components/statistic/container";
 import Dropdown from "../components/dropdown";
@@ -23,10 +23,6 @@ export default function ClientIndex({ items }: Props) {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState(Object.keys(sortingConfig)[0]);
   const [page, setPage] = useState(1);
-
-  useEffect(() => {
-    setPage(1);
-  }, [search, sort]);
 
   const sortConfig = sortingConfig[sort];
   const filteredItems = items.filter(
@@ -63,7 +59,10 @@ export default function ClientIndex({ items }: Props) {
           <SearchBar
             value={search}
             placeholder="Search for items..."
-            onChange={(value) => setSearch(value)}
+            onChange={(value) => {
+              setSearch(value);
+              setPage(1);
+            }}
           />
         </div>
 
