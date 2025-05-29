@@ -11,7 +11,7 @@ type Props = {
 
 const Pagination = ({ page, onChange, maxPage }: Props) => {
   return (
-    <div style={{ display: "flex", width: "100%", gap: "5px" }}>
+    <div style={{ display: "flex", width: "100%", gap: "5px", height: "42px" }}>
       <PaginationButton
         icon={arrowsBackwardIcon}
         onClick={() => onChange(page - 1)}
