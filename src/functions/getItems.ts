@@ -8,7 +8,8 @@ import diamondIcon from "../public/diamond.webp";
 
 import greenUpArrowIcon from "../public/green-up-arrow.webp";
 import redUpArrowIcon from "../public/red-up-arrow.webp";
-import downArrowIcon from "../public/down-arrow.webp";
+import redStraightDownArrowIcon from "../public/red-straight-down-arrow.webp";
+import questionMarkIcon from "../public/question-mark.png";
 
 // Edit this to implement your own way of fetching the items.
 
@@ -27,7 +28,7 @@ const getItems = async (): Promise<Item[]> => {
 
   return json.dataItems.map(({ data }: { data: any }) => {
     const demandValue = parseInt(data.demand.split("/")[0]);
-    const demand = Number.isNaN(demandValue) ? 0 : demandValue;
+    const demand = Number.isNaN(demandValue) ? null : demandValue;
 
     return {
       name: data.title,
@@ -39,31 +40,32 @@ const getItems = async (): Promise<Item[]> => {
       smallDetails: {
         Damage: {
           icon: swordIcon,
-          value: Number.isNaN(parseInt(data.dmg)) ? 0 : parseInt(data.dmg),
+          value: Number.isNaN(parseInt(data.dmg)) ? null : parseInt(data.dmg),
         },
         Range: {
           icon: bowIcon,
-          value: Number.isNaN(parseInt(data.rng)) ? 0 : parseInt(data.rng),
+          value: Number.isNaN(parseInt(data.rng)) ? null : parseInt(data.rng),
         },
         SPA: {
           icon: clockIcon,
-          value: Number.isNaN(parseInt(data.spa)) ? 0 : parseInt(data.spa),
+          value: Number.isNaN(parseInt(data.spa)) ? null : parseInt(data.spa),
         },
       },
       mainDetails: {
         Value: {
           icon: diamondIcon,
-          value: Number.isNaN(parseInt(data.value1)) ? 0 : data.value1,
+          value: Number.isNaN(parseInt(data.value1)) ? "N/A" : data.value1,
         },
         Demand: {
-          icon:
-            demand > 6
-              ? greenUpArrowIcon
-              : demand > 5
-              ? redUpArrowIcon
-              : downArrowIcon,
+          icon: !demand
+            ? questionMarkIcon
+            : demand > 6
+            ? greenUpArrowIcon
+            : demand > 4
+            ? redUpArrowIcon
+            : redStraightDownArrowIcon,
 
-          value: demand + "/10",
+          value: demand ? `${demand}/10` : "N/A",
         },
       },
     } satisfies Item;

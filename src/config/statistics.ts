@@ -1,6 +1,7 @@
 import StatisticsConfig from "../types/statisticsConfig";
 
 // Edit to have your own statistics
+// Add own logic to this
 
 const statisticsConfig: StatisticsConfig = {
   ["Total Items"]: { getValue: (items) => items.length, icon: "" },
@@ -8,7 +9,11 @@ const statisticsConfig: StatisticsConfig = {
   ["Average Value"]: {
     getValue: (items) =>
       items
-        .map((item) => item.mainDetails.Value.value)
+        .map((item) =>
+          typeof item.mainDetails.Value.value == "number"
+            ? item.mainDetails.Value.value
+            : 0
+        )
         .reduce((total, number) => total + number, 0) / items.length,
     icon: "",
   },
@@ -16,7 +21,10 @@ const statisticsConfig: StatisticsConfig = {
   ["Average Demand"]: {
     getValue: (items) =>
       items
-        .map((item) => parseInt(item.mainDetails.Demand.value.split("/")[0]))
+        .map((item) => {
+          const value = parseInt(item.mainDetails.Demand.value.split("/")[0]);
+          return Number.isNaN(value) ? 0 : value;
+        })
         .reduce((total, number) => total + number, 0) /
         items.length +
       "/10",
@@ -25,9 +33,7 @@ const statisticsConfig: StatisticsConfig = {
 
   ["Highest Damage"]: {
     getValue: (items) =>
-      items.sort(
-        (a, b) => b.smallDetails.Damage.value - a.smallDetails.Damage.value
-      )[0].smallDetails.Damage.value,
+      Math.max(...items.map((item) => item.smallDetails.Damage.value)),
     icon: "",
   },
 };

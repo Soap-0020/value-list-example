@@ -9,6 +9,10 @@ type Props = {
 };
 
 const Card = ({ item }: Props) => {
+  const smallDetails = Object.entries(item.smallDetails).filter(
+    ([_, details]) => details.value !== null && details.value !== undefined
+  );
+
   return (
     <div
       style={{
@@ -25,31 +29,33 @@ const Card = ({ item }: Props) => {
         backgroundColor: "rgb(36, 36, 36)",
       }}
     >
-      <div
-        style={{
-          backgroundColor: "rgb(48, 48, 48, 0.65)",
-          backdropFilter: "blur(6px)",
-          padding: "6px",
-          borderRadius: "6px",
-          display: "flex",
-          margin: "12px",
-          zIndex: 2,
-          gap: "6px",
-          flexDirection: "row",
-          position: "absolute",
-          top: 0,
-          right: 0,
-        }}
-      >
-        {Object.entries(item.smallDetails).map(([name, details]) => (
-          <CardIcon
-            icon={details.icon}
-            value={details.value}
-            name={name}
-            key={name}
-          />
-        ))}
-      </div>
+      {smallDetails.length > 0 && (
+        <div
+          style={{
+            backgroundColor: "rgb(48, 48, 48, 0.65)",
+            backdropFilter: "blur(6px)",
+            padding: "6px",
+            borderRadius: "6px",
+            display: "flex",
+            margin: "12px",
+            zIndex: 2,
+            gap: "6px",
+            flexDirection: "row",
+            position: "absolute",
+            top: 0,
+            right: 0,
+          }}
+        >
+          {smallDetails.map(([name, details]) => (
+            <CardIcon
+              icon={details.icon}
+              value={details.value}
+              name={name}
+              key={name}
+            />
+          ))}
+        </div>
+      )}
 
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Image

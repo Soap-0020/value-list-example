@@ -5,14 +5,14 @@ type Props = {
   name: string;
 };
 
-// WIP
+// WIP - VERY SOON
 
 const Statistic = ({ value, name }: Props) => {
   return (
     <div
       style={{
         flexGrow: 1,
-        width: "300px",
+        width: "250px",
         backgroundColor: "rgb(36, 36, 36)",
         padding: "12px",
         borderRadius: "12px",
