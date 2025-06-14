@@ -54,7 +54,7 @@ const getItems = async (): Promise<Item[]> => {
       mainDetails: {
         Value: {
           icon: diamondIcon,
-          value: Number.isNaN(parseInt(data.value1)) ? "N/A" : data.value1,
+          value: Number.isNaN(parseInt(data.value1)) ? null : data.value1,
         },
         Demand: {
           icon: !demand
@@ -65,7 +65,7 @@ const getItems = async (): Promise<Item[]> => {
             ? redUpArrowIcon
             : redStraightDownArrowIcon,
 
-          value: demand ? `${demand}/10` : "N/A",
+          value: demand ? `${demand}/10` : null,
         },
       },
     } satisfies Item;

@@ -3,6 +3,7 @@ import Item from "../../types/item";
 import CardIcon from "./cardIcon";
 import CardRow from "./cardRow";
 import Image from "next/image";
+import isUnderfinedOrNull from "@/src/functions/isUndefinedOrNull";
 
 type Props = {
   item: Item;
@@ -10,7 +11,7 @@ type Props = {
 
 const Card = ({ item }: Props) => {
   const smallDetails = Object.entries(item.smallDetails).filter(
-    ([_, details]) => details.value !== null && details.value !== undefined
+    ([_, details]) => !isUnderfinedOrNull(details.value)
   );
 
   return (

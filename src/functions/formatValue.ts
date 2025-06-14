@@ -1,3 +1,5 @@
+import isUnderfinedOrNull from "./isUndefinedOrNull";
+
 const numberFormats = {
   [""]: 1,
   K: 1_000,
@@ -15,6 +17,10 @@ const formatNumber = (value: number) => {
 };
 
 const formatValue = (value: any) =>
-  typeof value == "number" ? formatNumber(value) : value.toString();
+  typeof value == "number"
+    ? formatNumber(value)
+    : isUnderfinedOrNull(value)
+    ? "N/A"
+    : value.toString();
 
 export default formatValue;

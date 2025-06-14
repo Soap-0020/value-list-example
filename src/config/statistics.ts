@@ -1,4 +1,5 @@
 import calculateAverage from "../functions/calculateAverage";
+import isUnderfinedOrNull from "../functions/isUndefinedOrNull";
 import StatisticsConfig from "../types/statisticsConfig";
 
 // Edit to have your own statistics
@@ -21,7 +22,7 @@ const statisticsConfig: StatisticsConfig = {
     getValue: (items) =>
       calculateAverage(
         items
-          .filter((item) => item.mainDetails.Demand.value !== "N/A")
+          .filter((item) => !isUnderfinedOrNull(item.mainDetails.Demand.value))
           .map((item) => parseInt(item.mainDetails.Demand.value.split("/")[0]))
       ).toPrecision(2) + "/10",
     icon: "",

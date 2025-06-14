@@ -6,33 +6,34 @@ import greenArrowUpIcon from "../public/green-up-arrow.webp";
 import swordIcon from "../public/sword.webp";
 import clockIcon from "../public/clock.webp";
 import bowIcon from "../public/bow.webp";
+import isUnderfinedOrNull from "../functions/isUndefinedOrNull";
 
 const sortingConfig: SortingConfig = {
   ["Highest Value"]: {
     type: "ascending",
     getValue: (item) =>
-      typeof item.mainDetails.Value.value == "string"
-        ? -1
-        : item.mainDetails.Value.value,
+      typeof item.mainDetails.Value.value == "number"
+        ? item.mainDetails.Value.value
+        : -1,
     icon: diamondIcon,
   },
   ["Highest Demand"]: {
     type: "ascending",
-    getValue: (item) => {
-      const value = parseInt(item.mainDetails.Demand.value.split("/")[0]);
-      return Number.isNaN(value) ? -1 : value;
-    },
+    getValue: (item) =>
+      isUnderfinedOrNull(item.mainDetails.Demand.value)
+        ? -1
+        : parseInt(item.mainDetails.Demand.value.split("/")[0]),
     icon: greenArrowUpIcon,
   },
   ["Highest Damage"]: {
     type: "ascending",
     icon: swordIcon,
-    getValue: (item) => item.smallDetails.Damage.value ?? 0,
+    getValue: (item) => item.smallDetails.Damage.value ?? -1,
   },
   ["Highest Range"]: {
     type: "ascending",
     icon: bowIcon,
-    getValue: (item) => item.smallDetails.Range.value ?? 0,
+    getValue: (item) => item.smallDetails.Range.value ?? -1,
   },
   ["Lowest SPA"]: {
     type: "descending",
