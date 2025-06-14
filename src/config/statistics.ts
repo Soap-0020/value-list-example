@@ -1,3 +1,4 @@
+import calculateAverage from "../functions/calculateAverage";
 import StatisticsConfig from "../types/statisticsConfig";
 
 // Edit to have your own statistics
@@ -8,26 +9,21 @@ const statisticsConfig: StatisticsConfig = {
 
   ["Average Value"]: {
     getValue: (items) =>
-      items
-        .map((item) =>
-          typeof item.mainDetails.Value.value == "number"
-            ? item.mainDetails.Value.value
-            : 0
-        )
-        .reduce((total, number) => total + number, 0) / items.length,
+      calculateAverage(
+        items
+          .filter((item) => typeof item.mainDetails.Value.value == "number")
+          .map((item) => item.mainDetails.Value.value)
+      ),
     icon: "",
   },
 
   ["Average Demand"]: {
     getValue: (items) =>
-      items
-        .map((item) => {
-          const value = parseInt(item.mainDetails.Demand.value.split("/")[0]);
-          return Number.isNaN(value) ? 0 : value;
-        })
-        .reduce((total, number) => total + number, 0) /
-        items.length +
-      "/10",
+      calculateAverage(
+        items
+          .filter((item) => item.mainDetails.Demand.value !== "N/A")
+          .map((item) => parseInt(item.mainDetails.Demand.value.split("/")[0]))
+      ).toPrecision(2) + "/10",
     icon: "",
   },
 

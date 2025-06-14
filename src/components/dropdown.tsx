@@ -62,6 +62,7 @@ const Dropdown = ({ options, value, onSelect }: Props) => {
         <div
           style={{
             position: "absolute",
+            boxSizing: "border-box",
             top: "100%",
             width: "100%",
             backgroundColor: "rgb(36, 36, 36, 0.9)",
