@@ -1,4 +1,4 @@
-import getItems from "../functions/getItems";
+import getItems from "../config/getItems";
 import ClientIndex from "../clientPages";
 import { Suspense } from "react";
 

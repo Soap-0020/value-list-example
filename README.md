@@ -4,16 +4,16 @@
 
 ### next.config.js
 
-> You must update the hostname data to prevent people misusing your image optimizations.
+- You must update the hostname data to prevent people misusing your image optimizations.
 
-### src/functions/getItems.js
+### src/config/getItems.js
 
-> Update this to implement your own logic in fetching the items
-> When updating values and or adding new ones, changing invalid/undefined/etc values. CODE CHANGES MAY BE NEEDED. Run testing to see whats required. Open an issue if help is needed.
+- Update this to implement your own logic in fetching the items
+- When updating values and or adding new ones, changing invalid/undefined/etc values. CODE CHANGES MAY BE NEEDED. Run testing to see whats required. Open an issue if help is needed.
 
-### src/config
+### src/config/...
 
-> Update these files and personilise them for you
+- Update these files and personilise them for you
 
 ## Possible Edits
 
@@ -23,5 +23,5 @@
 
 # COMING SOON
 
-> New statistic card design
-> Code cleanup
+- New statistic card design
+- Code cleanup

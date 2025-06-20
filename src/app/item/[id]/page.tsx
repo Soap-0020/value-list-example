@@ -1,5 +1,7 @@
 import ClientItemPage from "@/src/clientPages/item";
-import getItems from "@/src/functions/getItems";
+import getItems from "@/src/config/getItems";
+import isSimilarItem from "@/src/config/isSimilarItem";
+import pageSize from "@/src/config/pageSize";
 
 export default async function ItemPage({
   params,
@@ -15,6 +17,10 @@ export default async function ItemPage({
 
   if (!foundItem) return <div>Not found</div>;
 
-  const similarItems = items.filter(() => true); // coming soon
+  const similarItems = items
+    .filter((item) => item.id !== foundItem.id)
+    .filter((item) => isSimilarItem(foundItem, item))
+    .slice(0, pageSize);
+
   return <ClientItemPage item={foundItem} similarItems={similarItems} />;
 }
