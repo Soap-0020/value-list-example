@@ -2,6 +2,7 @@ import ClientItemPage from "@/src/clientPages/item";
 import getItems from "@/src/config/getItems";
 import isSimilarItem from "@/src/config/isSimilarItem";
 import pageSize from "@/src/config/pageSize";
+import { notFound } from "next/navigation";
 
 export default async function ItemPage({
   params,
@@ -15,7 +16,7 @@ export default async function ItemPage({
   const items = await getItems();
   const foundItem = items.find((item) => item.id == decodeURIComponent(id));
 
-  if (!foundItem) return <div>Not found</div>;
+  if (!foundItem) return notFound();
 
   const similarItems = items
     .filter((item) => item.id !== foundItem.id)

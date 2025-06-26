@@ -18,14 +18,14 @@ const Pagination = ({ page, onChange, maxPage }: Props) => {
         disabled={page == 1}
       />
       <PaginationButton
-        value={page}
+        value={page + "/" + maxPage}
         onClick={() => onChange(1)}
         disabled={false}
       />
       <PaginationButton
         icon={arrowsForwardIcon}
         onClick={() => onChange(page + 1)}
-        disabled={page >= maxPage}
+        disabled={page == maxPage}
       />
     </div>
   );

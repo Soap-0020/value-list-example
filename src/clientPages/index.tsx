@@ -34,7 +34,6 @@ export default function ClientIndex({ items }: Props) {
   return (
     <div
       style={{
-        padding: "8px",
         display: "flex",
         gap: "12px",
         flexDirection: "column",
@@ -70,7 +69,7 @@ export default function ClientIndex({ items }: Props) {
           <Pagination
             page={page}
             onChange={setPage}
-            maxPage={filteredItems.length / pageSize}
+            maxPage={Math.ceil(filteredItems.length / pageSize)}
           />
         </div>
 
