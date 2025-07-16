@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import dropdownIcon from "../public/dropdown.png";
-import Icon from "../types/icon";
+import Icon from "../../types/icon";
 
 type Props = {
   options: {

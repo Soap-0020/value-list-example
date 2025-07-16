@@ -15,7 +15,7 @@ const Pagination = ({ page, onChange, maxPage }: Props) => {
       <PaginationButton
         icon={arrowsBackwardIcon}
         onClick={() => onChange(page - 1)}
-        disabled={page == 1}
+        disabled={page <= 1}
       />
       <PaginationButton
         value={page + "/" + maxPage}
@@ -25,7 +25,7 @@ const Pagination = ({ page, onChange, maxPage }: Props) => {
       <PaginationButton
         icon={arrowsForwardIcon}
         onClick={() => onChange(page + 1)}
-        disabled={page == maxPage}
+        disabled={page >= maxPage}
       />
     </div>
   );

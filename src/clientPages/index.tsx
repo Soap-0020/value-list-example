@@ -9,7 +9,7 @@ import statisticsConfig from "../config/statistics";
 import { useState } from "react";
 import Statistic from "../components/statistic/statistic";
 import StatisticContainer from "../components/statistic/container";
-import Dropdown from "../components/dropdown";
+import Dropdown from "../components/dropdown/dropdown";
 import Pagination from "../components/pagination/pagination";
 import pageSize from "../config/pageSize";
 

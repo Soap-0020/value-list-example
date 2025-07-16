@@ -16,7 +16,7 @@ const SearchBar = ({ value, onChange, placeholder }: Props) => {
         borderRadius: "10px",
         backgroundColor: "rgb(36, 36, 36)",
         display: "flex",
-        gap: "12px",
+        gap: "8px",
       }}
     >
       <Image src={searchIcon} alt="Search Icon" width={25} />
