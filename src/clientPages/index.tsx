@@ -82,7 +82,7 @@ export default function ClientIndex({ items }: Props) {
         >
           <Dropdown
             value={sort}
-            onSelect={setSort}
+            onSelect={(option) => setSort(option.name)}
             options={Object.entries(sortingConfig).map(([name, config]) => ({
               icon: config.icon,
               name,

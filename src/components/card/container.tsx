@@ -1,8 +1,6 @@
-type Props = {
-  children: React.ReactNode;
-};
+import Container from "@/src/types/container";
 
-const CardContainer = ({ children }: Props) => {
+const CardContainer = ({ children }: Container) => {
   return (
     <div
       style={{
