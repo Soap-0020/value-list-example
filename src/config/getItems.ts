@@ -1,4 +1,3 @@
-import { unstable_cache } from "next/cache";
 import Item from "../types/item";
 
 import swordIcon from "../public/sword.webp";
@@ -72,7 +71,4 @@ const getItems = async (): Promise<Item[]> => {
   });
 };
 
-// Update cache every 300 seconds (5 mins)
-export default unstable_cache(getItems, [], {
-  revalidate: 300,
-});
+export default getItems;

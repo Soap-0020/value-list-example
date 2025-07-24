@@ -1,6 +1,6 @@
 import ClientItemPage from "@/src/clientPages/item";
-import getItems from "@/src/config/getItems";
-import isSimilarItem from "@/src/config/isSimilarItem";
+import getItem from "@/src/config/getItem";
+import getSimilarItems from "@/src/config/getSimilarItems";
 import pageSize from "@/src/config/pageSize";
 import { notFound } from "next/navigation";
 
@@ -13,15 +13,14 @@ export default async function ItemPage({
 }) {
   const { id } = await params;
 
-  const items = await getItems();
-  const foundItem = items.find((item) => item.id == decodeURIComponent(id));
+  const item = await getItem(decodeURIComponent(id));
+  if (!item) return notFound();
+  const similarItems = await getSimilarItems(item);
 
-  if (!foundItem) return notFound();
-
-  const similarItems = items
-    .filter((item) => item.id !== foundItem.id)
-    .filter((item) => isSimilarItem(foundItem, item))
-    .slice(0, pageSize);
-
-  return <ClientItemPage item={foundItem} similarItems={similarItems} />;
+  return (
+    <ClientItemPage
+      item={item}
+      similarItems={similarItems.slice(0, pageSize)}
+    />
+  );
 }

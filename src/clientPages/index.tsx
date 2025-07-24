@@ -5,31 +5,44 @@ import CardContainer from "../components/card/container";
 import Item from "../types/item";
 import SearchBar from "../components/searchBar";
 import sortingConfig from "../config/sorting";
-import statisticsConfig from "../config/statistics";
-import { useState } from "react";
 import Statistic from "../components/statistic/statistic";
 import StatisticContainer from "../components/statistic/container";
 import Dropdown from "../components/dropdown/dropdown";
 import Pagination from "../components/pagination/pagination";
-import pageSize from "../config/pageSize";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import Statistics from "../types/statistics";
 
 type Props = {
   items: Item[];
+  statistics: Statistics;
+
+  pages: number;
+  page: number;
+  search: string;
+  sort: string;
 };
 
 // Change to show what you want.
 
-export default function ClientIndex({ items }: Props) {
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState(Object.keys(sortingConfig)[0]);
-  const [page, setPage] = useState(1);
+export default function ClientIndex({
+  items,
+  pages,
+  page,
+  search,
+  sort,
+  statistics,
+}: Props) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const sortConfig = sortingConfig[sort];
-  const filteredItems = items.filter(
-    (item) =>
-      item.name.toLowerCase().includes(search.toLowerCase()) ||
-      item.id.toLowerCase().includes(search.toLowerCase())
-  );
+  const updateParams = (values: { key: string; value: any }[]) => {
+    const params = new URLSearchParams(searchParams);
+    for (const value of values) {
+      params.set(value.key, value.value);
+    }
+    router.push(`?${params.toString()}`);
+  };
 
   return (
     <div
@@ -40,8 +53,8 @@ export default function ClientIndex({ items }: Props) {
       }}
     >
       <StatisticContainer>
-        {Object.entries(statisticsConfig).map(([name, data]) => (
-          <Statistic key={name} name={name} value={data.getValue(items)} />
+        {Object.entries(statistics).map(([name, data]) => (
+          <Statistic key={name} name={name} value={data.value} />
         ))}
       </StatisticContainer>
 
@@ -59,8 +72,16 @@ export default function ClientIndex({ items }: Props) {
             value={search}
             placeholder="Search for items..."
             onChange={(value) => {
-              setSearch(value);
-              setPage(1);
+              updateParams([
+                {
+                  key: "search",
+                  value,
+                },
+                {
+                  key: "page",
+                  value: 1,
+                },
+              ]);
             }}
           />
         </div>
@@ -68,8 +89,8 @@ export default function ClientIndex({ items }: Props) {
         <div style={{ flex: 2, minWidth: "min(100%, 225px)", display: "flex" }}>
           <Pagination
             page={page}
-            onChange={setPage}
-            maxPage={Math.ceil(filteredItems.length / pageSize)}
+            onChange={(page) => updateParams([{ key: "page", value: page }])}
+            maxPage={pages}
           />
         </div>
 
@@ -82,7 +103,9 @@ export default function ClientIndex({ items }: Props) {
         >
           <Dropdown
             value={sort}
-            onSelect={(option) => setSort(option.name)}
+            onSelect={(option) =>
+              updateParams([{ key: "sort", value: option.name }])
+            }
             options={Object.entries(sortingConfig).map(([name, config]) => ({
               icon: config.icon,
               name,
@@ -91,16 +114,9 @@ export default function ClientIndex({ items }: Props) {
         </div>
       </div>
       <CardContainer>
-        {filteredItems
-          .sort((a, b) =>
-            sortConfig.type == "ascending"
-              ? sortConfig.getValue(b) - sortConfig.getValue(a)
-              : sortConfig.getValue(a) - sortConfig.getValue(b)
-          )
-          .splice((page - 1) * pageSize, page * pageSize)
-          .map((item) => (
-            <Card item={item} key={item.name} />
-          ))}
+        {items.map((item) => (
+          <Card item={item} key={item.name} />
+        ))}
       </CardContainer>
     </div>
   );
