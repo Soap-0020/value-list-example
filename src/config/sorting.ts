@@ -8,6 +8,7 @@ import clockIcon from "../public/clock.webp";
 import bowIcon from "../public/bow.webp";
 import isUnderfinedOrNull from "../functions/isUndefinedOrNull";
 
+// Sorting config
 const sortingConfig: SortingConfig = {
   ["Highest Value"]: {
     type: "ascending",

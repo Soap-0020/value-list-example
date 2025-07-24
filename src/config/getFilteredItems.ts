@@ -5,6 +5,7 @@ import sortingConfig from "./sorting";
 import pageSize from "./pageSize";
 import searchItems from "../functions/searchItems";
 
+// Filter all the items by page, search and then sort it
 const getFilteredItems = async (
   search: string,
   page: number,

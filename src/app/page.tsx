@@ -17,7 +17,7 @@ export default async function Home({ searchParams }: Props) {
   const search = (await searchParams)?.search ?? "";
   const sort = (await searchParams)?.sort ?? Object.keys(sortingConfig)[0];
 
-  const pages = await getPages(search);
+  const pages = Math.max(await getPages(search), 1);
 
   if (page > pages || page <= 0 || !(sort in sortingConfig)) return notFound();
 
