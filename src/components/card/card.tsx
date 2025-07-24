@@ -1,9 +1,9 @@
-import Link from "next/link";
 import Item from "../../types/item";
 import CardIcon from "./cardIcon";
 import CardRow from "./cardRow";
 import Image from "next/image";
 import isUnderfinedOrNull from "@/src/functions/isUndefinedOrNull";
+import Link from "../link";
 
 type Props = {
   item: Item;
@@ -121,7 +121,6 @@ const Card = ({ item }: Props) => {
           textAlign: "center",
           textDecoration: "none",
         }}
-        prefetch
       >
         View More
       </Link>
