@@ -1,7 +1,5 @@
-"use client";
-
 import NextJsLink from "next/link";
-import { CSSProperties, useState } from "react";
+import { CSSProperties } from "react";
 
 type Props = {
   href: string;
@@ -9,16 +7,8 @@ type Props = {
   style?: CSSProperties;
 };
 const Link = ({ href, style, children }: Props) => {
-  const [prefetch, setPrefetch] = useState(false);
-
   return (
-    <NextJsLink
-      href={href}
-      prefetch={prefetch}
-      onMouseEnter={() => setPrefetch(true)}
-      onFocus={() => setPrefetch(true)}
-      style={style}
-    >
+    <NextJsLink href={href} prefetch={true} style={style}>
       {children}
     </NextJsLink>
   );

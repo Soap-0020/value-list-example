@@ -41,7 +41,7 @@ export default function ClientIndex({
     for (const value of values) {
       params.set(value.key, value.value);
     }
-    router.push(`?${params.toString()}`);
+    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   return (
