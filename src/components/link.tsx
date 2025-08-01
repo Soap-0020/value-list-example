@@ -1,3 +1,5 @@
+"use client";
+
 import NextJsLink from "next/link";
 import { CSSProperties } from "react";
 
@@ -16,6 +18,7 @@ const Link = ({ className, children, href, style, disabled }: Props) => {
       href={href}
       style={style}
       onClick={(e) => disabled && e.preventDefault()}
+      prefetch={!disabled}
     >
       {children}
     </NextJsLink>
