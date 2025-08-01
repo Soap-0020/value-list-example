@@ -9,9 +9,9 @@ import Statistic from "../components/statistic/statistic";
 import StatisticContainer from "../components/statistic/container";
 import Dropdown from "../components/dropdown/dropdown";
 import Pagination from "../components/pagination/pagination";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+
 import Statistics from "../types/statistics";
+import useSearchParams from "../hooks/useSearchParams";
 
 type Props = {
   items: Item[];
@@ -33,16 +33,7 @@ export default function ClientIndex({
   sort,
   statistics,
 }: Props) {
-  const router = useRouter();
   const searchParams = useSearchParams();
-
-  const updateParams = (values: { key: string; value: any }[]) => {
-    const params = new URLSearchParams(searchParams);
-    for (const value of values) {
-      params.set(value.key, value.value);
-    }
-    router.push(`?${params.toString()}`, { scroll: false });
-  };
 
   return (
     <div
@@ -72,7 +63,7 @@ export default function ClientIndex({
             value={search}
             placeholder="Search for items..."
             onChange={(value) => {
-              updateParams([
+              searchParams.update([
                 {
                   key: "search",
                   value,
@@ -89,7 +80,9 @@ export default function ClientIndex({
         <div style={{ flex: 2, minWidth: "min(100%, 225px)", display: "flex" }}>
           <Pagination
             page={page}
-            onChange={(page) => updateParams([{ key: "page", value: page }])}
+            getLink={(page) =>
+              searchParams.edit([{ key: "page", value: page }])
+            }
             maxPage={pages}
           />
         </div>
@@ -104,7 +97,7 @@ export default function ClientIndex({
           <Dropdown
             value={sort}
             onSelect={(option) =>
-              updateParams([{ key: "sort", value: option.name }])
+              searchParams.update([{ key: "sort", value: option.name }])
             }
             options={Object.entries(sortingConfig).map(([name, config]) => ({
               icon: config.icon,

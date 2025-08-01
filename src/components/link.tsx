@@ -2,13 +2,21 @@ import NextJsLink from "next/link";
 import { CSSProperties } from "react";
 
 type Props = {
-  href: string;
+  className?: string;
   children: React.ReactNode;
+  href: string;
+  disabled?: boolean;
   style?: CSSProperties;
 };
-const Link = ({ href, style, children }: Props) => {
+
+const Link = ({ className, children, href, style, disabled }: Props) => {
   return (
-    <NextJsLink href={href} prefetch={true} style={style}>
+    <NextJsLink
+      className={className}
+      href={href}
+      style={style}
+      onClick={(e) => disabled && e.preventDefault()}
+    >
       {children}
     </NextJsLink>
   );

@@ -1,8 +1,9 @@
 import Icon from "@/src/types/icon";
 import Image from "next/image";
+import Link from "../link";
 
 type Props = {
-  onClick: () => any;
+  link: string;
   disabled: boolean;
 } & (
   | {
@@ -15,9 +16,10 @@ type Props = {
 
 const PaginationButton = (props: Props) => {
   return (
-    <button
+    <Link
+      href={props.link}
+      disabled={props.disabled}
       className="paginationButton"
-      onClick={() => !props.disabled && props.onClick()}
       style={{
         flexGrow: 1,
         outline: "none",
@@ -37,7 +39,7 @@ const PaginationButton = (props: Props) => {
       ) : (
         <Image src={props.icon} alt="Pagination Icon" width={20} />
       )}
-    </button>
+    </Link>
   );
 };
 

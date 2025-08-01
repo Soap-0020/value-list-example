@@ -5,26 +5,26 @@ import arrowsBackwardIcon from "../../public/arrowsBackward.png";
 
 type Props = {
   page: number;
-  onChange: (page: number) => any;
+  getLink: (page: number) => string;
   maxPage: number;
 };
 
-const Pagination = ({ page, onChange, maxPage }: Props) => {
+const Pagination = ({ page, getLink, maxPage }: Props) => {
   return (
     <div style={{ display: "flex", width: "100%", gap: "5px", height: "42px" }}>
       <PaginationButton
         icon={arrowsBackwardIcon}
-        onClick={() => onChange(page - 1)}
+        link={getLink(page - 1)}
         disabled={page <= 1}
       />
       <PaginationButton
         value={page + "/" + maxPage}
-        onClick={() => onChange(1)}
-        disabled={false}
+        link={getLink(1)}
+        disabled={page == 1}
       />
       <PaginationButton
         icon={arrowsForwardIcon}
-        onClick={() => onChange(page + 1)}
+        link={getLink(page + 1)}
         disabled={page >= maxPage}
       />
     </div>
