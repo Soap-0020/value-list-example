@@ -10,6 +10,7 @@ type Props = {
   disabled?: boolean;
   style?: CSSProperties;
   onClick?: () => any;
+  scroll?: boolean;
 };
 
 const Link = ({
@@ -18,6 +19,7 @@ const Link = ({
   href,
   style,
   disabled,
+  scroll = false,
   onClick,
 }: Props) => {
   return (
@@ -25,6 +27,7 @@ const Link = ({
       className={className}
       href={href}
       style={style}
+      scroll={scroll}
       onClick={(e) => {
         onClick && onClick();
         disabled && e.preventDefault();

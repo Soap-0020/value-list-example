@@ -9,7 +9,7 @@ type Props = {
 };
 
 const DropdownButton = ({ onClick, value, options }: Props) => {
-  const currentConfig = options.find(
+  const currentOption = options.find(
     (option) => option.name == value
   ) as Props["options"][number];
 
@@ -44,7 +44,7 @@ const DropdownButton = ({ onClick, value, options }: Props) => {
           justifyContent: "center",
         }}
       >
-        <Image width={25} height={25} src={currentConfig.icon} alt={value} />
+        <Image width={25} height={25} src={currentOption.icon} alt={value} />
         <span>{value}</span>
       </div>
       <div style={{ opacity: 0.9, position: "absolute", right: 10 }}>

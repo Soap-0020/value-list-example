@@ -110,6 +110,7 @@ const Card = ({ item }: Props) => {
       </div>
       <Link
         href={`/item/${item.id}`}
+        scroll={true}
         style={{
           borderRadius: "4px",
           fontSize: "14px",
