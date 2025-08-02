@@ -9,15 +9,26 @@ type Props = {
   href: string;
   disabled?: boolean;
   style?: CSSProperties;
+  onClick?: () => any;
 };
 
-const Link = ({ className, children, href, style, disabled }: Props) => {
+const Link = ({
+  className,
+  children,
+  href,
+  style,
+  disabled,
+  onClick,
+}: Props) => {
   return (
     <NextJsLink
       className={className}
       href={href}
       style={style}
-      onClick={(e) => disabled && e.preventDefault()}
+      onClick={(e) => {
+        onClick && onClick();
+        disabled && e.preventDefault();
+      }}
       prefetch={!disabled}
     >
       {children}

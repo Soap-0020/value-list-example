@@ -96,8 +96,8 @@ export default function ClientIndex({
         >
           <Dropdown
             value={sort}
-            onSelect={(option) =>
-              searchParams.update([{ key: "sort", value: option.name }])
+            getLink={(option) =>
+              searchParams.edit([{ key: "sort", value: option.name }])
             }
             options={Object.entries(sortingConfig).map(([name, config]) => ({
               icon: config.icon,

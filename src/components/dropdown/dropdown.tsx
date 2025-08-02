@@ -7,10 +7,10 @@ import DropdownMenu from "./menu";
 type Props = {
   options: DropdownOption[];
   value: string;
-  onSelect: (item: DropdownOption) => any;
+  getLink: (item: DropdownOption) => string;
 };
 
-const Dropdown = ({ options, value, onSelect }: Props) => {
+const Dropdown = ({ options, value, getLink }: Props) => {
   const [showing, setShowing] = useState(false);
 
   return (
@@ -23,10 +23,8 @@ const Dropdown = ({ options, value, onSelect }: Props) => {
 
       {showing && (
         <DropdownMenu
-          onSelect={(option) => {
-            onSelect(option);
-            setShowing(false);
-          }}
+          onSelect={() => setShowing(false)}
+          getLink={getLink}
           options={options}
           value={value}
         />

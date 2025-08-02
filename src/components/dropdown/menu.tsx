@@ -1,13 +1,15 @@
 import DropdownOption from "@/src/types/dropdownOption";
 import Image from "next/image";
+import Link from "../link";
 
 type Props = {
   options: DropdownOption[];
   value: string;
-  onSelect: (option: DropdownOption) => any;
+  getLink: (option: DropdownOption) => string;
+  onSelect: () => any;
 };
 
-const DropdownMenu = ({ onSelect, options, value }: Props) => {
+const DropdownMenu = ({ onSelect, getLink, options, value }: Props) => {
   return (
     <div
       style={{
@@ -27,9 +29,10 @@ const DropdownMenu = ({ onSelect, options, value }: Props) => {
       {options
         .filter((option) => option.name !== value)
         .map((option, index) => (
-          <div
+          <Link
             key={option.name}
-            onClick={() => onSelect(option)}
+            href={getLink(option)}
+            onClick={onSelect}
             style={{
               padding: "8px",
               cursor: "pointer",
@@ -47,7 +50,7 @@ const DropdownMenu = ({ onSelect, options, value }: Props) => {
           >
             <Image width={25} height={25} src={option.icon} alt={value} />
             <span>{option.name}</span>
-          </div>
+          </Link>
         ))}
     </div>
   );
