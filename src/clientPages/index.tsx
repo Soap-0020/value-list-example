@@ -12,6 +12,7 @@ import Pagination from "../components/pagination/pagination";
 
 import Statistics from "../types/statistics";
 import useSearchParams from "../hooks/useSearchParams";
+import { useState } from "react";
 
 type Props = {
   items: Item[];
@@ -34,6 +35,8 @@ export default function ClientIndex({
   statistics,
 }: Props) {
   const searchParams = useSearchParams();
+
+  const [currentSearch, setCurrentSearch] = useState(search);
 
   return (
     <div
@@ -60,9 +63,10 @@ export default function ClientIndex({
           style={{ flex: 12, minWidth: "min(100%, 225px)", display: "flex" }}
         >
           <SearchBar
-            value={search}
+            value={currentSearch}
             placeholder="Search for items..."
             onChange={(value) => {
+              setCurrentSearch(value);
               searchParams.update([
                 {
                   key: "search",
