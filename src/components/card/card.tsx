@@ -1,9 +1,9 @@
 import Item from "../../types/item";
 import CardIcon from "./cardIcon";
 import CardRow from "./cardRow";
-import Image from "next/image";
 import isUnderfinedOrNull from "@/src/functions/isUndefinedOrNull";
 import Link from "../link";
+import GlowingImage from "../glowingImage";
 
 type Props = {
   item: Item;
@@ -58,12 +58,19 @@ const Card = ({ item }: Props) => {
         </div>
       )}
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Image
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          borderColor: "red",
+        }}
+      >
+        <GlowingImage
           alt={item.name}
           height={100}
           width={100}
-          src={item.image}
+          image={item.image}
+          activiate={"hover"}
           style={{
             borderRadius: "12px",
           }}

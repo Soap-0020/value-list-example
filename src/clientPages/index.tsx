@@ -48,7 +48,12 @@ export default function ClientIndex({
     >
       <StatisticContainer>
         {Object.entries(statistics).map(([name, data]) => (
-          <Statistic key={name} name={name} value={data.value} />
+          <Statistic
+            key={name}
+            name={name}
+            icon={data.icon}
+            value={data.value}
+          />
         ))}
       </StatisticContainer>
 

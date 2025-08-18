@@ -15,11 +15,21 @@ const getFilteredItems = async (
   const sortConfig = sortingConfig[sorting];
 
   return searchItems(search, items)
-    .sort((a, b) =>
-      sortConfig.type == "ascending"
-        ? sortConfig.getValue(b) - sortConfig.getValue(a)
-        : sortConfig.getValue(a) - sortConfig.getValue(b)
-    )
+    .sort((a, b) => {
+      const valueA = sortConfig.getValue(a);
+      const valueB = sortConfig.getValue(b);
+
+      if (typeof valueA !== typeof valueB)
+        throw new Error("Each sorting value has different type");
+
+      let result: number;
+
+      if (typeof valueA == "string")
+        result = valueA.localeCompare(valueB as string);
+      else result = (valueB as number) - (valueA as number);
+
+      return sortConfig.type == "ascending" ? result : -result;
+    })
     .slice((page - 1) * pageSize, page * pageSize);
 };
 

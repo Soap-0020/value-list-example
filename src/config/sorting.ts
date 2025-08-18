@@ -1,13 +1,14 @@
-// Controls how sorting values works on the home page.
-
+import isUnderfinedOrNull from "../functions/isUndefinedOrNull";
 import SortingConfig from "../types/sortingConfig";
+
 import diamondIcon from "../public/diamond.webp";
 import greenArrowUpIcon from "../public/green-up-arrow.webp";
 import swordIcon from "../public/sword.webp";
 import clockIcon from "../public/clock.webp";
 import bowIcon from "../public/bow.webp";
-import isUnderfinedOrNull from "../functions/isUndefinedOrNull";
+import hashIcon from "../public/hash.webp";
 
+// Controls how sorting values works on the home page.
 // Sorting config
 const sortingConfig: SortingConfig = {
   ["Highest Value"]: {
@@ -40,6 +41,11 @@ const sortingConfig: SortingConfig = {
     type: "descending",
     icon: clockIcon,
     getValue: (item) => item.smallDetails.SPA.value ?? Infinity,
+  },
+  ["Alphabetical"]: {
+    type: "ascending",
+    getValue: (item) => item.name,
+    icon: hashIcon,
   },
 };
 

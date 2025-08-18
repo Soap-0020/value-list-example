@@ -4,7 +4,7 @@ import Icon from "./icon";
 type SortingConfig = {
   [name: string]: {
     type: "ascending" | "descending";
-    getValue: (item: Item) => number;
+    getValue: (item: Item) => number | string;
     icon: Icon;
   };
 };
