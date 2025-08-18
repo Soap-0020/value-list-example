@@ -22,7 +22,7 @@ const Statistic = ({ value, name, icon }: Props) => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "10px",
+        gap: "4px",
       }}
     >
       <div
@@ -36,7 +36,7 @@ const Statistic = ({ value, name, icon }: Props) => {
         style={{
           display: "flex",
           flexDirection: "row",
-          gap: "8px",
+          gap: "10px",
           alignItems: "center",
         }}
       >
