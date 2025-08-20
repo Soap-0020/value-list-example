@@ -1,6 +1,11 @@
 import Container from "@/src/types/container";
+import { CSSProperties } from "react";
 
-const CardContainer = ({ children }: Container) => {
+type Props = Container & {
+  style?: CSSProperties;
+};
+
+const CardContainer = ({ children, style }: Props) => {
   return (
     <div
       style={{
@@ -9,6 +14,7 @@ const CardContainer = ({ children }: Container) => {
         gap: "12px",
         flexWrap: "wrap",
         overflow: "visible",
+        ...style,
       }}
     >
       {children}

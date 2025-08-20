@@ -33,9 +33,11 @@ const getItems = async (): Promise<Item[]> => {
       name: data.title,
       image: data.imageLink,
       id: data.title,
+      description: `The ${data.title} item has ${data.dmg} damange!`,
 
       // They don't provide history data
       history: [],
+
       smallDetails: {
         Damage: {
           icon: swordIcon,

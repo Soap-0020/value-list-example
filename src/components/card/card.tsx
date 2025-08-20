@@ -23,7 +23,7 @@ const Card = ({ item }: Props) => {
         display: "flex",
         flexDirection: "column",
         padding: "12px",
-        flexGrow: "1",
+        flexGrow: 1,
         gap: "8px",
         position: "relative",
         color: "rgb(191, 191, 191)",

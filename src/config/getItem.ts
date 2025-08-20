@@ -7,7 +7,7 @@ const getItem = async (id: string): Promise<Item> => {
   const items = await getItems();
 
   const item = items.find((item) => item.id == id);
-  if (!item) throw new Error("Invalid item id");
+  if (!item) throw new Error(`Invalid item id: ${id}`);
 
   return item;
 };
