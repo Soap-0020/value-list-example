@@ -12,13 +12,16 @@
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "next": "15.2.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-virtualized": "^9.22.6",
+    "recharts": "^3.1.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-virtualized": "^9.22.2",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "typescript": "^5"

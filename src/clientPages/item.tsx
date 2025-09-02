@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import Card from "../components/card/card";
 import CardContainer from "../components/card/container";
+import Chart from "../components/chart";
 import GlowingImage from "../components/glowingImage";
 import HorizontalScroll from "../components/horizontalScroll";
 import Item from "../types/item";
@@ -10,6 +14,10 @@ type Props = {
 };
 
 export default function ClientItemPage({ similarItems, item }: Props) {
+  const [currentGraph, setCurrentGraph] = useState(
+    Object.keys(item.history)[0]
+  );
+
   return (
     <div
       style={{
@@ -50,8 +58,25 @@ export default function ClientItemPage({ similarItems, item }: Props) {
             width: "calc(60% - 24px)",
             flexGrow: 1,
             display: "flex",
+            flexDirection: "column",
           }}
         >
+          {currentGraph && (
+            <div>
+              {Object.keys(item.history).length >= 2 &&
+                Object.keys(item.history).map((name) => (
+                  <button onClick={() => setCurrentGraph(name)}>{name}</button>
+                ))}
+              <div
+                style={{
+                  width: "100%",
+                  height: "400px",
+                }}
+              >
+                <Chart values={item.history[currentGraph]} />
+              </div>
+            </div>
+          )}
           <div
             style={{
               width: "100%",

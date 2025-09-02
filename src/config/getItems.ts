@@ -34,9 +34,22 @@ const getItems = async (): Promise<Item[]> => {
       image: data.imageLink,
       id: data.title,
       description: `The ${data.title} item has ${data.dmg} damange!`,
+      rarity: "Epic",
 
       // They don't provide history data
-      history: [],
+      history: {
+        ["Value"]: [134, 234, 243, 634].map((value, index) => ({
+          date: Date.now() - index,
+          icon: diamondIcon,
+          value: value,
+        })),
+        ["Demand"]: [7, 4, 6, 2].map((value, index) => ({
+          date: Date.now() - index * 2,
+          value,
+          icon: value > 6 ? greenUpArrowIcon : redStraightDownArrowIcon,
+          formattedValue: value + "/10",
+        })),
+      },
 
       smallDetails: {
         Damage: {
