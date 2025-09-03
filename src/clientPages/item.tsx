@@ -65,7 +65,9 @@ export default function ClientItemPage({ similarItems, item }: Props) {
             <div>
               {Object.keys(item.history).length >= 2 &&
                 Object.keys(item.history).map((name) => (
-                  <button onClick={() => setCurrentGraph(name)}>{name}</button>
+                  <button onClick={() => setCurrentGraph(name)} key={name}>
+                    {name}
+                  </button>
                 ))}
               <div
                 style={{
@@ -73,7 +75,10 @@ export default function ClientItemPage({ similarItems, item }: Props) {
                   height: "400px",
                 }}
               >
-                <Chart values={item.history[currentGraph]} />
+                <Chart
+                  values={item.history[currentGraph]}
+                  name={currentGraph}
+                />
               </div>
             </div>
           )}

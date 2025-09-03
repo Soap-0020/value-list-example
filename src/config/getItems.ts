@@ -36,17 +36,17 @@ const getItems = async (): Promise<Item[]> => {
       description: `The ${data.title} item has ${data.dmg} damange!`,
       rarity: "Epic",
 
-      // They don't provide history data
+      // They don't provide history data, make up own for testing
       history: {
         ["Value"]: [134, 234, 243, 634].map((value, index) => ({
-          date: Date.now() - index,
+          date: Date.now() - index * 200_000_000,
           icon: diamondIcon,
           value: value,
         })),
-        ["Demand"]: [7, 4, 6, 2].map((value, index) => ({
-          date: Date.now() - index * 2,
+        ["Demand"]: [6, 4, 3, 2, 5, 8, 10].map((value, index) => ({
+          date: Date.now() - index * 200_000_000,
           value,
-          icon: value > 6 ? greenUpArrowIcon : redStraightDownArrowIcon,
+          icon: value >= 6 ? greenUpArrowIcon : redStraightDownArrowIcon,
           formattedValue: value + "/10",
         })),
       },
