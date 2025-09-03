@@ -37,6 +37,7 @@ const Chart = ({ values, name }: Props) => {
                   ? (foundData.formattedValue as string)
                   : formatValue(value);
               }}
+              tickMargin={6}
             />
             <XAxis
               dataKey="date"
