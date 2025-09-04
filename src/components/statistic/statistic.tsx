@@ -6,50 +6,66 @@ type Props = {
   value: string | number;
   name: string;
   icon: Icon;
+  iconType: "left" | "next";
 };
 
-const Statistic = ({ value, name, icon }: Props) => {
+const Statistic = ({ value, name, icon, iconType }: Props) => {
   return (
     <div
       style={{
         flexGrow: 1,
-        width: "240px",
         color: "rgb(191, 191, 191)",
         backgroundColor: "#242424",
         padding: "16px",
         borderRadius: "12px",
-        textAlign: "center",
         display: "flex",
-        flexDirection: "column",
+        flexDirection: "row",
+        gap: "12px",
         alignItems: "center",
-        gap: "4px",
+        justifyContent: "center",
       }}
     >
+      {iconType == "left" && (
+        <Image src={icon} alt={name} height={60} width={60} />
+      )}
       <div
         style={{
-          fontSize: "18px",
-        }}
-      >
-        {name}
-      </div>
-      <div
-        style={{
+          gap: "4px",
           display: "flex",
-          flexDirection: "row",
-          gap: "10px",
+          flexDirection: "column",
+          textAlign: "center",
           alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <Image src={icon} alt={name} height={32} width={32} />
-
         <div
           style={{
-            fontSize: "28px",
-            fontWeight: 600,
-            color: "white",
+            fontSize: "18px",
           }}
         >
-          {formatValue(value)}
+          {name}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: "10px",
+            alignItems: "center",
+          }}
+        >
+          {iconType == "next" && (
+            <Image src={icon} alt={name} height={32} width={32} />
+          )}
+
+          <div
+            style={{
+              fontSize: "28px",
+              fontWeight: 600,
+              color: "white",
+            }}
+          >
+            {formatValue(value)}
+          </div>
         </div>
       </div>
     </div>

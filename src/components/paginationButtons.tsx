@@ -1,7 +1,7 @@
-import PaginationButton from "./button";
-
-import arrowsForwardIcon from "../../public/arrowsForward.png";
-import arrowsBackwardIcon from "../../public/arrowsBackward.png";
+import arrowsForwardIcon from "../public/arrowsForward.png";
+import arrowsBackwardIcon from "../public/arrowsBackward.png";
+import ButtonGroupContainer from "./buttonGroup/container";
+import GroupButton from "./buttonGroup/button";
 
 type Props = {
   page: number;
@@ -11,23 +11,23 @@ type Props = {
 
 const Pagination = ({ page, getLink, maxPage }: Props) => {
   return (
-    <div style={{ display: "flex", width: "100%", gap: "5px", height: "42px" }}>
-      <PaginationButton
+    <ButtonGroupContainer>
+      <GroupButton
         icon={arrowsBackwardIcon}
         link={getLink(page - 1)}
         disabled={page <= 1}
       />
-      <PaginationButton
+      <GroupButton
         value={page + "/" + maxPage}
         link={getLink(1)}
         disabled={page == 1}
       />
-      <PaginationButton
+      <GroupButton
         icon={arrowsForwardIcon}
         link={getLink(page + 1)}
         disabled={page >= maxPage}
       />
-    </div>
+    </ButtonGroupContainer>
   );
 };
 

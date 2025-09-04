@@ -7,6 +7,10 @@ import Chart from "../components/chart";
 import GlowingImage from "../components/glowingImage";
 import HorizontalScroll from "../components/horizontalScroll";
 import Item from "../types/item";
+import ButtonGroupContainer from "../components/buttonGroup/container";
+import GroupButton from "../components/buttonGroup/button";
+import StatisticContainer from "../components/statistic/container";
+import Statistic from "../components/statistic/statistic";
 
 type Props = {
   similarItems: Item[];
@@ -24,15 +28,17 @@ export default function ClientItemPage({ similarItems, item }: Props) {
         width: "100%",
         display: "flex",
         justifyContent: "center",
+        color: "white",
       }}
     >
       <div
         style={{
-          width: "min(max(70%, 1000px), 100%)",
+          width: "min(max(50%, 1000px), 100%)",
           display: "flex",
           flexWrap: "wrap",
           flexDirection: "row",
-          gap: "24px",
+          columnGap: "24px",
+          rowGap: "12px",
         }}
       >
         <div
@@ -40,9 +46,23 @@ export default function ClientItemPage({ similarItems, item }: Props) {
             minWidth: "350px",
             width: "calc(40% - 24px)",
             flexGrow: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "12px",
           }}
         >
-          <div>
+          <div
+            style={{
+              backgroundColor: "rgb(36, 36, 36)",
+              width: "100%",
+              height: "300px",
+              borderRadius: "16px",
+              alignItems: "center",
+              justifyContent: "center",
+              display: "flex",
+            }}
+          >
             <GlowingImage
               image={item.image}
               alt={item.name}
@@ -50,8 +70,42 @@ export default function ClientItemPage({ similarItems, item }: Props) {
               height={250}
             />
           </div>
-          <h1>{item.name}</h1>
-          <h2>{item.description}</h2>
+          <div>
+            <p
+              style={{
+                fontSize: "36px",
+                fontWeight: 600,
+                textAlign: "center",
+              }}
+            >
+              {item.name}
+            </p>
+            <p style={{ color: "rgb(191, 191, 191)", textAlign: "center" }}>
+              {item.description}
+            </p>
+          </div>
+          <StatisticContainer>
+            {Object.entries(item.mainDetails).map(([name, data]) => (
+              <Statistic
+                value={data.value}
+                icon={data.icon}
+                name={name}
+                iconType="left"
+                key={name}
+              />
+            ))}
+          </StatisticContainer>
+          <StatisticContainer>
+            {Object.entries(item.smallDetails).map(([name, data]) => (
+              <Statistic
+                value={data.value}
+                icon={data.icon}
+                name={name}
+                iconType="next"
+                key={name}
+              />
+            ))}
+          </StatisticContainer>
         </div>
         <div
           style={{
@@ -59,49 +113,74 @@ export default function ClientItemPage({ similarItems, item }: Props) {
             flexGrow: 1,
             display: "flex",
             flexDirection: "column",
+            gap: "12px",
           }}
         >
           {currentGraph && (
             <div>
-              {Object.keys(item.history).length >= 2 &&
-                Object.keys(item.history).map((name) => (
-                  <button onClick={() => setCurrentGraph(name)} key={name}>
-                    {name}
-                  </button>
-                ))}
-              <div
+              <p
                 style={{
-                  width: "100%",
-                  height: "400px",
+                  fontWeight: 600,
+                  fontSize: "32px",
                 }}
               >
-                <Chart
-                  values={item.history[currentGraph]}
-                  name={currentGraph}
-                />
-              </div>
+                {currentGraph} History
+              </p>
+              {Object.keys(item.history).length >= 2 && (
+                <ButtonGroupContainer>
+                  {Object.keys(item.history).map((name) => (
+                    <GroupButton
+                      value={name}
+                      disabled={name == currentGraph}
+                      onClick={() => setCurrentGraph(name)}
+                      key={name}
+                    />
+                  ))}
+                </ButtonGroupContainer>
+              )}
             </div>
           )}
-          <div
-            style={{
-              width: "100%",
-            }}
-          >
-            <h1>Similar Items</h1>
-            <HorizontalScroll>
-              <CardContainer
+
+          {currentGraph && (
+            <div
+              style={{
+                width: "100%",
+                height: "450px",
+              }}
+            >
+              <Chart values={item.history[currentGraph]} name={currentGraph} />
+            </div>
+          )}
+          {similarItems.length > 0 && (
+            <div
+              style={{
+                width: "100%",
+              }}
+            >
+              <p
                 style={{
-                  flexWrap: "nowrap",
-                  overflow: "auto",
-                  justifyContent: "left",
+                  fontWeight: 600,
+                  fontSize: "32px",
                 }}
               >
-                {similarItems.map((item) => (
-                  <Card item={item} key={item.id} />
-                ))}
-              </CardContainer>
-            </HorizontalScroll>
-          </div>
+                Similar Items
+              </p>
+              <HorizontalScroll>
+                <CardContainer
+                  style={{
+                    flexWrap: "nowrap",
+                    overflowY: "auto",
+                    overflowX: "visible",
+                    justifyContent: "left",
+                  }}
+                >
+                  {similarItems.map((item) => (
+                    <Card item={item} key={item.id} />
+                  ))}
+                </CardContainer>
+              </HorizontalScroll>
+            </div>
+          )}
         </div>
       </div>
     </div>

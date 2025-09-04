@@ -34,7 +34,7 @@ const Chart = ({ values, name }: Props) => {
                 if (!foundData) return "N/A";
 
                 return "formattedValue" in foundData
-                  ? (foundData.formattedValue as string)
+                  ? foundData.formattedValue
                   : formatValue(value);
               }}
               tickMargin={6}
@@ -80,8 +80,12 @@ const Chart = ({ values, name }: Props) => {
                       />
                       <div>
                         <p>
-                          {new Date(data.date).toLocaleDateString()}{" "}
-                          {new Date(data.date).toLocaleTimeString()}
+                          {[1, 2, 3, 4]
+                            .map(
+                              (index) =>
+                                new Date(data.date).toString().split(" ")[index]
+                            )
+                            .join(" ")}
                         </p>
                         <p>
                           {name}:{" "}

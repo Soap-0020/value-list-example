@@ -9,6 +9,7 @@ const StatisticContainer = ({ children }: Props) => {
         display: "flex",
         gap: "12px",
         flexWrap: "wrap",
+        width: "100%",
       }}
     >
       {children}

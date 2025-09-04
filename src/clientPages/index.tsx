@@ -8,7 +8,7 @@ import sortingConfig from "../config/sorting";
 import Statistic from "../components/statistic/statistic";
 import StatisticContainer from "../components/statistic/container";
 import Dropdown from "../components/dropdown/dropdown";
-import Pagination from "../components/pagination/pagination";
+import Pagination from "../components/paginationButtons";
 
 import Statistics from "../types/statistics";
 import useSearchParams from "../hooks/useSearchParams";
@@ -53,6 +53,7 @@ export default function ClientIndex({
             name={name}
             icon={data.icon}
             value={data.value}
+            iconType="next"
           />
         ))}
       </StatisticContainer>
