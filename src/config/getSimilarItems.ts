@@ -10,9 +10,7 @@ const getSimilarItems = async (item: Item): Promise<Item[]> => {
   );
 
   return filteredItems.filter(
-    (compairedItem) =>
-      item.name.charAt(0).toLowerCase() ==
-      compairedItem.name.charAt(0).toLowerCase()
+    (compairedItem) => item.rarity == compairedItem.rarity
   );
 };
 

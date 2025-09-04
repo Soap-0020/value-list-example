@@ -68,6 +68,9 @@ export default function ClientItemPage({ similarItems, item }: Props) {
               alt={item.name}
               width={250}
               height={250}
+              style={{
+                borderRadius: "12px",
+              }}
             />
           </div>
           <div>
