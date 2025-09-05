@@ -24,8 +24,7 @@ const HorizontalScroll = ({ children }: Container) => {
       ref={ref}
       style={{
         display: "flex",
-        overflowX: "auto",
-        overflowY: "hidden",
+        overflowY: "scroll",
         scrollBehavior: "smooth",
         msOverflowStyle: "none",
         scrollbarWidth: "none",

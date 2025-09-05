@@ -26,7 +26,7 @@ const getItems = async (): Promise<Item[]> => {
     return {
       name: data.title,
       image: data.imageLink,
-      id: data.title,
+      id: data.title.replaceAll(" ", "-"),
       description: `The ${data.title} item has ${data.dmg} damange! It is one of the rariest items in Spongebob Tower Defense with a current value of ${data.value1}.`,
       rarity: data.type,
 

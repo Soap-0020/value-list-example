@@ -26,7 +26,7 @@ const CardIcon = (data: Props) => {
       onMouseOut={() => setPopupShow(false)}
     >
       {popupShow && (
-        <span
+        <div
           style={{
             backdropFilter: "blur(2px)",
             color: "rgb(191, 191, 191)",
@@ -57,7 +57,7 @@ const CardIcon = (data: Props) => {
           <span>
             {data.name}: {formatValue(data.value)}
           </span>
-        </span>
+        </div>
       )}
       <Image
         src={data.icon}

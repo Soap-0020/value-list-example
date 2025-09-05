@@ -33,7 +33,7 @@ export default function ClientItemPage({ similarItems, item }: Props) {
     >
       <div
         style={{
-          width: "min(max(50%, 1000px), 100%)",
+          width: "min(max(55%, 1000px), 100%)",
           display: "flex",
           flexWrap: "wrap",
           flexDirection: "row",
@@ -55,37 +55,45 @@ export default function ClientItemPage({ similarItems, item }: Props) {
           <div
             style={{
               backgroundColor: "rgb(36, 36, 36)",
-              width: "100%",
-              height: "300px",
+              width: "calc(100% - 48px)",
+              padding: "24px",
               borderRadius: "16px",
-              alignItems: "center",
-              justifyContent: "center",
               display: "flex",
+              gap: "12px",
+              flexDirection: "column",
             }}
           >
-            <GlowingImage
-              image={item.image}
-              alt={item.name}
-              width={250}
-              height={250}
+            <div
               style={{
-                borderRadius: "12px",
-              }}
-            />
-          </div>
-          <div>
-            <p
-              style={{
-                fontSize: "36px",
-                fontWeight: 600,
-                textAlign: "center",
+                alignItems: "center",
+                justifyContent: "center",
+                display: "flex",
               }}
             >
-              {item.name}
-            </p>
-            <p style={{ color: "rgb(191, 191, 191)", textAlign: "center" }}>
-              {item.description}
-            </p>
+              <GlowingImage
+                image={item.image}
+                alt={item.name}
+                width={250}
+                height={250}
+                style={{
+                  borderRadius: "12px",
+                }}
+              />
+            </div>
+            <div>
+              <p
+                style={{
+                  fontSize: "36px",
+                  fontWeight: 600,
+                  textAlign: "center",
+                }}
+              >
+                {item.name}
+              </p>
+              <p style={{ color: "rgb(191, 191, 191)", textAlign: "center" }}>
+                {item.description}
+              </p>
+            </div>
           </div>
           <StatisticContainer>
             {Object.entries(item.mainDetails).map(([name, data]) => (
@@ -131,14 +139,25 @@ export default function ClientItemPage({ similarItems, item }: Props) {
               </p>
               {Object.keys(item.history).length >= 2 && (
                 <ButtonGroupContainer>
-                  {Object.keys(item.history).map((name) => (
-                    <GroupButton
-                      value={name}
-                      disabled={name == currentGraph}
-                      onClick={() => setCurrentGraph(name)}
-                      key={name}
-                    />
-                  ))}
+                  {Object.keys(item.history).map((name) => {
+                    const lastHistoryUpdate = Math.max(
+                      ...item.history[name].map((data) => data.date)
+                    );
+
+                    return (
+                      <GroupButton
+                        value={name}
+                        icon={
+                          item.history[name].find(
+                            (data) => data.date == lastHistoryUpdate
+                          )?.icon
+                        }
+                        disabled={name == currentGraph}
+                        onClick={() => setCurrentGraph(name)}
+                        key={name}
+                      />
+                    );
+                  })}
                 </ButtonGroupContainer>
               )}
             </div>
@@ -172,13 +191,14 @@ export default function ClientItemPage({ similarItems, item }: Props) {
                 <CardContainer
                   style={{
                     flexWrap: "nowrap",
-                    overflowY: "auto",
-                    overflowX: "visible",
+
                     justifyContent: "left",
                   }}
                 >
                   {similarItems.map((item) => (
-                    <Card item={item} key={item.id} />
+                    <div key={item.id}>
+                      <Card item={item} />
+                    </div>
                   ))}
                 </CardContainer>
               </HorizontalScroll>

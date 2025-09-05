@@ -5,30 +5,27 @@ import { CSSProperties } from "react";
 
 type Props = {
   disabled: boolean;
+  icon?: Icon;
+  value?: any;
 } & (
   | {
-      icon: Icon;
+      link: string;
     }
   | {
-      value: any;
+      onClick: () => any;
     }
-) &
-  (
-    | {
-        link: string;
-      }
-    | {
-        onClick: () => any;
-      }
-  );
+);
 
 const GroupButton = (props: Props) => {
-  const content =
-    "value" in props ? (
-      props.value
-    ) : (
-      <Image src={props.icon} alt="Pagination Icon" width={20} />
-    );
+  const content = (
+    <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+      {"icon" in props && (
+        <Image src={props.icon as Icon} alt="Pagination Icon" height={23} />
+      )}
+
+      {"value" in props && <p>{props.value}</p>}
+    </div>
+  );
 
   const style: CSSProperties = {
     flexGrow: 1,
