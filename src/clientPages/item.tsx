@@ -95,6 +95,19 @@ export default function ClientItemPage({ similarItems, item }: Props) {
               </p>
             </div>
           </div>
+          {Object.keys(item.connectedItems).length > 0 && (
+            <ButtonGroupContainer>
+              {Object.entries(item.connectedItems).map(([id, data]) => (
+                <GroupButton
+                  key={id}
+                  icon={data.icon}
+                  value={data.value}
+                  link={`/item/${id}`}
+                  disabled={id == item.id}
+                />
+              ))}
+            </ButtonGroupContainer>
+          )}
           <StatisticContainer>
             {Object.entries(item.mainDetails).map(([name, data]) => (
               <Statistic

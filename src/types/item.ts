@@ -11,6 +11,8 @@ type Item = {
   id: string;
   description: string;
   rarity: string;
+
+  connectedItems: { [id: string]: Detail<string> };
   mainDetails: { [key: string]: Detail };
   smallDetails: { [key: string]: Detail };
   history: {

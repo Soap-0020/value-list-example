@@ -10,6 +10,10 @@ import redUpArrowIcon from "../public/red-up-arrow.webp";
 import redStraightDownArrowIcon from "../public/red-straight-down-arrow.webp";
 import questionMarkIcon from "../public/question-mark.png";
 
+import shinyIcon from "../public/shiny.png";
+import normalIcon from "../public/normal.png";
+import goldenIcon from "../public/golden.png";
+
 // Edit this to implement your own way of fetching the items.
 
 const getItems = async (): Promise<Item[]> => {
@@ -23,10 +27,12 @@ const getItems = async (): Promise<Item[]> => {
     const demandValue = parseFloat(data.demand?.split("/")[0]);
     const demand = Number.isNaN(demandValue) ? null : demandValue;
 
+    const id = data.title.replaceAll(" ", "-");
+
     return {
       name: data.title,
       image: data.imageLink,
-      id: data.title.replaceAll(" ", "-"),
+      id,
       description: `The ${data.title} item has ${data.dmg} damange! It is one of the rariest items in Spongebob Tower Defense with a current value of ${data.value1}.`,
       rarity: data.type,
 
@@ -43,6 +49,22 @@ const getItems = async (): Promise<Item[]> => {
           icon: value >= 6 ? greenUpArrowIcon : redStraightDownArrowIcon,
           formattedValue: value + "/10",
         })),
+      },
+
+      // Example of how a connected item feature would be used (Edit or remove depending on how the game works)
+      connectedItems: {
+        [id]: {
+          value: "Normal",
+          icon: normalIcon,
+        },
+        [id + "-golden"]: {
+          value: "Golden",
+          icon: goldenIcon,
+        },
+        [id + "-shiny"]: {
+          value: "Shiny",
+          icon: shinyIcon,
+        },
       },
 
       smallDetails: {
