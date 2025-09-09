@@ -10,7 +10,7 @@ type Item = {
   image: string;
   id: string;
   description: string;
-  rarity: string;
+  rarity: Detail<string>;
 
   connectedItems: { [id: string]: Detail<string> };
   mainDetails: { [key: string]: Detail };

@@ -59,7 +59,7 @@ export default function ClientItemPage({ similarItems, item }: Props) {
               padding: "24px",
               borderRadius: "16px",
               display: "flex",
-              gap: "12px",
+              gap: "6px",
               flexDirection: "column",
             }}
           >
@@ -86,6 +86,9 @@ export default function ClientItemPage({ similarItems, item }: Props) {
                   fontSize: "36px",
                   fontWeight: 600,
                   textAlign: "center",
+                  textOverflow: "ellipsis",
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {item.name}

@@ -34,7 +34,10 @@ const getItems = async (): Promise<Item[]> => {
       image: data.imageLink,
       id,
       description: `The ${data.title} item has ${data.dmg} damange! It is one of the rariest items in Spongebob Tower Defense with a current value of ${data.value1}.`,
-      rarity: data.type,
+      rarity: {
+        icon: "",
+        value: data.type,
+      },
 
       // They don't provide history data, make up own for testing
       history: {
