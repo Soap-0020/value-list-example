@@ -76,45 +76,50 @@ const Card = ({ item }: Props) => {
           }}
         />
       </div>
-      <div>
-        <h3
-          style={{
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            maxWidth: "100%",
-            fontWeight: "600",
-            textAlign: "center",
-          }}
-        >
-          {item.name}
-        </h3>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "6px",
-        }}
-      >
+      <div style={{ display: "flex", gap: "4px", flexDirection: "column" }}>
+        <div>
+          <h3
+            style={{
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              maxWidth: "100%",
+              fontWeight: "600",
+              textAlign: "center",
+            }}
+          >
+            {item.name}
+          </h3>
+          <div style={{ fontSize: "13px", textAlign: "center" }}>
+            {item.rarity.value}
+          </div>
+        </div>
         <div
           style={{
-            gap: "2px",
             display: "flex",
             flexDirection: "column",
+            gap: "6px",
           }}
         >
-          {Object.entries(item.mainDetails).map(([name, detail]) => (
-            <CardRow
-              name={name}
-              value={detail.value}
-              icon={detail.icon}
-              key={name}
-            />
-          ))}
+          <div
+            style={{
+              gap: "2px",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            {Object.entries(item.mainDetails).map(([name, detail]) => (
+              <CardRow
+                name={name}
+                value={detail.value}
+                icon={detail.icon}
+                key={name}
+              />
+            ))}
+          </div>
         </div>
       </div>
+
       <Link
         href={`/item/${item.id}`}
         scroll={true}

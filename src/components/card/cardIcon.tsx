@@ -9,18 +9,21 @@ type Props = {
   icon: Icon;
   value: any;
   name: string;
+
+  size?: number;
 };
 
-const CardIcon = (data: Props) => {
+const CardIcon = ({ icon, value, name, size = 25 }: Props) => {
   const [popupShow, setPopupShow] = useState(false);
 
   return (
     <div
       style={{
-        height: "25px",
-        width: "25px",
+        height: size,
+        width: size,
         position: "relative",
         display: "inline-block",
+        zIndex: 1000,
       }}
       onMouseOver={() => setPopupShow(true)}
       onMouseOut={() => setPopupShow(false)}
@@ -35,7 +38,7 @@ const CardIcon = (data: Props) => {
             borderRadius: "4px",
             padding: "6px",
             position: "absolute",
-            bottom: "37.5px",
+            bottom: size + 12.5,
             left: "50%",
             transform: "translateX(-50%)",
             whiteSpace: "nowrap",
@@ -45,8 +48,8 @@ const CardIcon = (data: Props) => {
           }}
         >
           <Image
-            src={data.icon}
-            alt={data.name}
+            src={icon}
+            alt={name}
             height={25}
             width={25}
             style={{
@@ -55,15 +58,15 @@ const CardIcon = (data: Props) => {
             }}
           />
           <span>
-            {data.name}: {formatValue(data.value)}
+            {name}: {formatValue(value)}
           </span>
         </div>
       )}
       <Image
-        src={data.icon}
-        alt={data.name}
-        height={25}
-        width={25}
+        src={icon}
+        alt={name}
+        height={size}
+        width={size}
         style={{
           cursor: "pointer",
           borderRadius: "2px",

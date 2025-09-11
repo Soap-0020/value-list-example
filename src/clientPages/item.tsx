@@ -11,6 +11,7 @@ import ButtonGroupContainer from "../components/buttonGroup/container";
 import GroupButton from "../components/buttonGroup/button";
 import StatisticContainer from "../components/statistic/container";
 import Statistic from "../components/statistic/statistic";
+import CardIcon from "../components/card/cardIcon";
 
 type Props = {
   similarItems: Item[];
@@ -81,18 +82,28 @@ export default function ClientItemPage({ similarItems, item }: Props) {
               />
             </div>
             <div>
-              <p
+              <div
                 style={{
-                  fontSize: "36px",
-                  fontWeight: 600,
-                  textAlign: "center",
-                  textOverflow: "ellipsis",
-                  overflow: "hidden",
-                  whiteSpace: "nowrap",
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "6px",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                {item.name}
-              </p>
+                <CardIcon {...item.rarity} name="Rarity" size={36} />
+                <p
+                  style={{
+                    fontSize: "36px",
+                    fontWeight: 600,
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {item.name}
+                </p>
+              </div>
               <p style={{ color: "rgb(191, 191, 191)", textAlign: "center" }}>
                 {item.description}
               </p>

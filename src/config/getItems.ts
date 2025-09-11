@@ -12,7 +12,9 @@ import questionMarkIcon from "../public/question-mark.png";
 
 import shinyIcon from "../public/shiny.png";
 import normalIcon from "../public/normal.png";
-import goldenIcon from "../public/golden.png";
+import wumboIcon from "../public/wumbo.png";
+
+import gamepassIcon from "../public/gamepass.webp";
 
 // Edit this to implement your own way of fetching the items.
 
@@ -35,7 +37,7 @@ const getItems = async (): Promise<Item[]> => {
       id,
       description: `The ${data.title} item has ${data.dmg} damange! It is one of the rariest items in Spongebob Tower Defense with a current value of ${data.value1}.`,
       rarity: {
-        icon: "",
+        icon: data.type == "Gamepasses" ? gamepassIcon : questionMarkIcon,
         value: data.type,
       },
 
@@ -60,9 +62,9 @@ const getItems = async (): Promise<Item[]> => {
           value: "Normal",
           icon: normalIcon,
         },
-        [id + "-golden"]: {
-          value: "Golden",
-          icon: goldenIcon,
+        [id + "-wumbo"]: {
+          value: "Wumbo",
+          icon: wumboIcon,
         },
         [id + "-shiny"]: {
           value: "Shiny",
