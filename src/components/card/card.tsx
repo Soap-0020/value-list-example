@@ -4,6 +4,7 @@ import CardRow from "./cardRow";
 import isUnderfinedOrNull from "@/src/functions/isUndefinedOrNull";
 import Link from "../link";
 import GlowingImage from "../glowingImage";
+import Image from "next/image";
 
 type Props = {
   item: Item;
@@ -90,8 +91,23 @@ const Card = ({ item }: Props) => {
           >
             {item.name}
           </h3>
-          <div style={{ fontSize: "13px", textAlign: "center" }}>
-            {item.rarity.value}
+          <div
+            style={{
+              fontSize: "13px",
+              display: "flex",
+              flexDirection: "row",
+              gap: "4px",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              src={item.rarity.icon}
+              height={16}
+              width={16}
+              alt={item.rarity.value}
+            />
+            <p>{item.rarity.value}</p>
           </div>
         </div>
         <div

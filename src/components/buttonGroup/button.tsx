@@ -20,7 +20,12 @@ const GroupButton = (props: Props) => {
   const content = (
     <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
       {"icon" in props && (
-        <Image src={props.icon as Icon} alt="Pagination Icon" height={23} />
+        <Image
+          src={props.icon as Icon}
+          alt="Pagination Icon"
+          height={23}
+          width={23}
+        />
       )}
 
       {"value" in props && <p>{props.value}</p>}

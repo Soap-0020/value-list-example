@@ -10,9 +10,9 @@ import redUpArrowIcon from "../public/red-up-arrow.webp";
 import redStraightDownArrowIcon from "../public/red-straight-down-arrow.webp";
 import questionMarkIcon from "../public/question-mark.png";
 
-import shinyIcon from "../public/shiny.png";
+import shinyIcon from "../public/shiny.webp";
 import normalIcon from "../public/normal.png";
-import wumboIcon from "../public/wumbo.png";
+import wumboIcon from "../public/wumbo.webp";
 
 import gamepassIcon from "../public/gamepass.webp";
 
