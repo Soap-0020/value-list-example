@@ -16,9 +16,16 @@ import CardIcon from "../components/card/cardIcon";
 type Props = {
   similarItems: Item[];
   item: Item;
+  itemVariants: (Item["variant"] & {
+    id: string;
+  })[];
 };
 
-export default function ClientItemPage({ similarItems, item }: Props) {
+export default function ClientItemPage({
+  similarItems,
+  item,
+  itemVariants,
+}: Props) {
   const [currentGraph, setCurrentGraph] = useState(
     Object.keys(item.history)[0]
   );
@@ -109,19 +116,19 @@ export default function ClientItemPage({ similarItems, item }: Props) {
               </p>
             </div>
           </div>
-          {Object.keys(item.connectedItems).length > 0 && (
-            <ButtonGroupContainer>
-              {Object.entries(item.connectedItems).map(([id, data]) => (
-                <GroupButton
-                  key={id}
-                  icon={data.icon}
-                  value={data.value}
-                  link={`/item/${id}`}
-                  disabled={id == item.id}
-                />
-              ))}
-            </ButtonGroupContainer>
-          )}
+
+          <ButtonGroupContainer>
+            {itemVariants.map((variant) => (
+              <GroupButton
+                key={variant.value}
+                icon={variant.icon}
+                value={variant.value}
+                link={`/item/${variant.id}`}
+                disabled={variant.id == item.id}
+              />
+            ))}
+          </ButtonGroupContainer>
+
           <StatisticContainer>
             {Object.entries(item.mainDetails).map(([name, data]) => (
               <Statistic
@@ -218,7 +225,6 @@ export default function ClientItemPage({ similarItems, item }: Props) {
                 <CardContainer
                   style={{
                     flexWrap: "nowrap",
-
                     justifyContent: "left",
                   }}
                 >

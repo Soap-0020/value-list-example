@@ -1,5 +1,6 @@
 import ClientItemPage from "@/src/clientPages/item";
 import getItem from "@/src/config/getItem";
+import getItemVariants from "@/src/config/getItemVariants";
 import getSimilarItems from "@/src/config/getSimilarItems";
 
 export default async function ItemPage({
@@ -12,7 +13,17 @@ export default async function ItemPage({
   const { id } = await params;
 
   const item = await getItem(decodeURIComponent(id));
-  const similarItems = await getSimilarItems(item);
 
-  return <ClientItemPage item={item} similarItems={similarItems} />;
+  const [itemVariants, similarItems] = await Promise.all([
+    getItemVariants(item.name),
+    getSimilarItems(item),
+  ]);
+
+  return (
+    <ClientItemPage
+      item={item}
+      similarItems={similarItems}
+      itemVariants={itemVariants}
+    />
+  );
 }

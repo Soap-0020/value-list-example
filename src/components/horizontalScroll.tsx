@@ -23,11 +23,8 @@ const HorizontalScroll = ({ children }: Container) => {
     <div
       ref={ref}
       style={{
-        display: "flex",
-        overflowY: "scroll",
-        scrollBehavior: "smooth",
-        msOverflowStyle: "none",
-        scrollbarWidth: "none",
+        overflowX: "auto",
+        overflowY: "visible",
       }}
     >
       {children}

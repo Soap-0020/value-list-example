@@ -17,19 +17,20 @@ export default async function Home({ searchParams }: Props) {
   const search = (await searchParams)?.search ?? "";
   const sort = (await searchParams)?.sort ?? Object.keys(sortingConfig)[0];
 
-  const pages = Math.max(await getPages(search), 1);
+  if (!(sort in sortingConfig)) return notFound();
 
-  if (page > pages || page <= 0 || !(sort in sortingConfig)) return notFound();
-
-  const statistics = await getStatistics();
-  const filteredItems = await getFilteredItems(search, page, sort);
+  const [pages, statistics, filteredItems] = await Promise.all([
+    getPages(search),
+    getStatistics(),
+    getFilteredItems(search, page, sort),
+  ]);
 
   return (
     <Suspense>
       <ClientIndex
         items={filteredItems}
         pages={pages}
-        page={page}
+        page={Math.min(Math.max(page, 1), pages)}
         search={search}
         sort={sort}
         statistics={statistics}

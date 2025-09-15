@@ -13,7 +13,6 @@ const CardContainer = ({ children, style }: Props) => {
         justifyContent: "center",
         gap: "12px",
         flexWrap: "wrap",
-        overflow: "visible",
         ...style,
       }}
     >

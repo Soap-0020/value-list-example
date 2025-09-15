@@ -30,16 +30,29 @@ const getItems = async (): Promise<Item[]> => {
     const demand = Number.isNaN(demandValue) ? null : demandValue;
 
     const id = data.title.replaceAll(" ", "-");
+    const variant = ["Normal", "Wumbo", "Shiny"][Math.floor(Math.random() * 3)];
 
     return {
       name: data.title,
       image: data.imageLink,
       id,
-      description: `The ${data.title} item has ${data.dmg} damange! It is one of the rariest items in Spongebob Tower Defense with a current value of ${data.value1}.`,
+      description: `The ${data.title} item has ${data.dmg} damange! It is one of the rariest items in Spongebob Tower Defense with a current value of ${data.value1}. This is the ${variant} varient of this item which is also a ${data.type}!`,
       rarity: {
         icon: data.type == "Gamepasses" ? gamepassIcon : questionMarkIcon,
         value: data.type,
       },
+
+      variant: {
+        value: variant,
+        icon:
+          variant == "Normal"
+            ? normalIcon
+            : variant == "Shiny"
+            ? shinyIcon
+            : wumboIcon,
+      }, // This adds buttons on item pages to go between connected items (eg: shiny/golden/rainbow etc).
+      // This example uses shiny and wumbo as they are used in game
+      // To add a variant to eachothers page, it will check the item name. Edit this logic in the "getItemVariants.ts" file
 
       // They don't provide history data, make up own for testing
       history: {
@@ -54,22 +67,6 @@ const getItems = async (): Promise<Item[]> => {
           icon: value >= 6 ? greenUpArrowIcon : redStraightDownArrowIcon,
           formattedValue: value + "/10",
         })),
-      },
-
-      // Example of how a connected item feature would be used (Edit or remove depending on how the game works)
-      connectedItems: {
-        [id]: {
-          value: "Normal",
-          icon: normalIcon,
-        },
-        [id + "-wumbo"]: {
-          value: "Wumbo",
-          icon: wumboIcon,
-        },
-        [id + "-shiny"]: {
-          value: "Shiny",
-          icon: shinyIcon,
-        },
       },
 
       smallDetails: {
