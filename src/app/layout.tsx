@@ -11,7 +11,7 @@ const poppins = Poppins({
 
 // Edit for your branding
 export const metadata: Metadata = {
-  title: "[Name] Value List",
+  title: "Spongebob Tower Defence Values",
   description: "The best value list!",
 };
 
