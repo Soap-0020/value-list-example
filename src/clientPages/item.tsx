@@ -12,8 +12,7 @@ import GroupButton from "../components/buttonGroup/button";
 import StatisticContainer from "../components/statistic/container";
 import Statistic from "../components/statistic/statistic";
 import ItemVariant from "../types/itemVariant";
-import CardIconContainer from "../components/card/iconContainer";
-import CardIcon from "../components/card/cardIcon";
+import CardRow from "../components/card/cardRow";
 
 type Props = {
   similarItems: Item[];
@@ -72,39 +71,25 @@ export default function ClientItemPage({
               position: "relative",
             }}
           >
-            {Object.keys(item.informativeDetails).length > 0 && (
-              <CardIconContainer>
-                {Object.entries(item.informativeDetails).map(
-                  ([name, details]) => (
-                    <CardIcon
-                      icon={details.icon}
-                      value={details.value}
-                      name={name}
-                      key={name}
-                    />
-                  )
-                )}
-              </CardIconContainer>
-            )}
-            <div>
-              <div
+            <div
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                display: "flex",
+              }}
+            >
+              <GlowingImage
+                image={item.image}
+                alt={item.name}
+                width={250}
+                height={250}
                 style={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  display: "flex",
+                  borderRadius: "12px",
                 }}
-              >
-                <GlowingImage
-                  image={item.image}
-                  alt={item.name}
-                  width={250}
-                  height={250}
-                  style={{
-                    borderRadius: "12px",
-                  }}
-                />
-              </div>
+              />
+            </div>
 
+            <div>
               <p
                 style={{
                   fontSize: "36px",
@@ -121,6 +106,17 @@ export default function ClientItemPage({
               <p style={{ color: "rgb(191, 191, 191)", textAlign: "center" }}>
                 {item.description}
               </p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                gap: "1px",
+                flexDirection: "column",
+              }}
+            >
+              {Object.entries(item.informativeDetails).map(([name, data]) => (
+                <CardRow name={name} key={name} {...data} />
+              ))}
             </div>
           </div>
 
