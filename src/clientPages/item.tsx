@@ -11,14 +11,14 @@ import ButtonGroupContainer from "../components/buttonGroup/container";
 import GroupButton from "../components/buttonGroup/button";
 import StatisticContainer from "../components/statistic/container";
 import Statistic from "../components/statistic/statistic";
+import ItemVariant from "../types/itemVariant";
+import CardIconContainer from "../components/card/iconContainer";
 import CardIcon from "../components/card/cardIcon";
 
 type Props = {
   similarItems: Item[];
   item: Item;
-  itemVariants: (Item["variant"] & {
-    id: string;
-  })[];
+  itemVariants: ItemVariant[];
 };
 
 export default function ClientItemPage({
@@ -67,50 +67,57 @@ export default function ClientItemPage({
               padding: "24px",
               borderRadius: "16px",
               display: "flex",
-              gap: "6px",
               flexDirection: "column",
+              gap: "6px",
+              position: "relative",
             }}
           >
-            <div
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-                display: "flex",
-              }}
-            >
-              <GlowingImage
-                image={item.image}
-                alt={item.name}
-                width={250}
-                height={250}
-                style={{
-                  borderRadius: "12px",
-                }}
-              />
-            </div>
+            {Object.keys(item.informativeDetails).length > 0 && (
+              <CardIconContainer>
+                {Object.entries(item.informativeDetails).map(
+                  ([name, details]) => (
+                    <CardIcon
+                      icon={details.icon}
+                      value={details.value}
+                      name={name}
+                      key={name}
+                    />
+                  )
+                )}
+              </CardIconContainer>
+            )}
             <div>
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  gap: "6px",
                   alignItems: "center",
                   justifyContent: "center",
+                  display: "flex",
                 }}
               >
-                <CardIcon {...item.rarity} name="Rarity" size={36} />
-                <p
+                <GlowingImage
+                  image={item.image}
+                  alt={item.name}
+                  width={250}
+                  height={250}
                   style={{
-                    fontSize: "36px",
-                    fontWeight: 600,
-                    textOverflow: "ellipsis",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
+                    borderRadius: "12px",
                   }}
-                >
-                  {item.name}
-                </p>
+                />
               </div>
+
+              <p
+                style={{
+                  fontSize: "36px",
+                  fontWeight: 600,
+                  textOverflow: "ellipsis",
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                  textAlign: "center",
+                }}
+              >
+                {item.name}
+              </p>
+
               <p style={{ color: "rgb(191, 191, 191)", textAlign: "center" }}>
                 {item.description}
               </p>

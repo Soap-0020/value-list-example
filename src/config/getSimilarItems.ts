@@ -10,7 +10,9 @@ const getSimilarItems = async (item: Item): Promise<Item[]> => {
   );
 
   return filteredItems.filter(
-    (compairedItem) => item.rarity.value == compairedItem.rarity.value
+    (compairedItem) =>
+      item.informativeDetails.Rarity.value ==
+      compairedItem.informativeDetails.Rarity.value
   );
 };
 

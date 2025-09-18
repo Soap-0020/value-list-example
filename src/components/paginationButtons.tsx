@@ -20,7 +20,7 @@ const Pagination = ({ page, getLink, maxPage }: Props) => {
       <GroupButton
         value={page + "/" + maxPage}
         link={getLink(1)}
-        disabled={page == 1}
+        disabled={page <= 1}
       />
       <GroupButton
         icon={arrowsForwardIcon}

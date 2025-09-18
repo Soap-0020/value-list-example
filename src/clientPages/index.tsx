@@ -116,11 +116,31 @@ export default function ClientIndex({
           />
         </div>
       </div>
-      <CardContainer>
-        {items.map((item) => (
-          <Card item={item} key={item.name} />
-        ))}
-      </CardContainer>
+      {items.length > 0 ? (
+        <CardContainer>
+          {items.map((item) => (
+            <Card item={item} key={item.name} />
+          ))}
+        </CardContainer>
+      ) : (
+        <div
+          style={{
+            textAlign: "center",
+          }}
+        >
+          <h1
+            style={{
+              color: "white",
+            }}
+          >
+            No Items Found...
+          </h1>
+          <p style={{ color: "rgb(191, 191, 191)", fontSize: "18px" }}>
+            Try and use a different search term or contact the site owner if you
+            think something should show here.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

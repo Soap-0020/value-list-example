@@ -37,22 +37,24 @@ const getItems = async (): Promise<Item[]> => {
       image: data.imageLink,
       id,
       description: `The ${data.title} item has ${data.dmg} damange! It is one of the rariest items in Spongebob Tower Defense with a current value of ${data.value1}. This is the ${variant} varient of this item which is also a ${data.type}!`,
-      rarity: {
-        icon: data.type == "Gamepasses" ? gamepassIcon : questionMarkIcon,
-        value: data.type,
-      },
 
-      variant: {
-        value: variant,
-        icon:
-          variant == "Normal"
-            ? normalIcon
-            : variant == "Shiny"
-            ? shinyIcon
-            : wumboIcon,
-      }, // This adds buttons on item pages to go between connected items (eg: shiny/golden/rainbow etc).
-      // This example uses shiny and wumbo as they are used in game
-      // To add a variant to eachothers page, it will check the item name. Edit this logic in the "getItemVariants.ts" file
+      informativeDetails: {
+        // Shows little details below the item name on the card and page
+        ["Variant"]: {
+          value: variant,
+          icon:
+            variant == "Normal"
+              ? normalIcon
+              : variant == "Shiny"
+              ? shinyIcon
+              : wumboIcon,
+        },
+
+        ["Rarity"]: {
+          icon: data.type == "Gamepasses" ? gamepassIcon : questionMarkIcon,
+          value: data.type,
+        },
+      },
 
       // They don't provide history data, make up own for testing
       history: {

@@ -1,20 +1,14 @@
-import Icon from "./icon";
-
-type Detail<T = any> = {
-  icon: Icon;
-  value: T;
-};
+import Detail from "./detail";
 
 type Item = {
   name: string;
   image: string;
   id: string;
   description: string;
-  rarity: Detail<string>;
-  variant: Detail<string>;
 
   mainDetails: { [key: string]: Detail };
   smallDetails: { [key: string]: Detail };
+  informativeDetails: { [key: string]: Detail<string> };
   history: {
     [name: string]: (Detail<number> & {
       date: number;

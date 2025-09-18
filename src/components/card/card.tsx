@@ -4,7 +4,9 @@ import CardRow from "./cardRow";
 import isUnderfinedOrNull from "@/src/functions/isUndefinedOrNull";
 import Link from "../link";
 import GlowingImage from "../glowingImage";
-import Image from "next/image";
+import CardValue from "./cardValue";
+import CardValueContainer from "./valueContainer";
+import CardIconContainer from "./iconContainer";
 
 type Props = {
   item: Item;
@@ -32,22 +34,7 @@ const Card = ({ item }: Props) => {
       }}
     >
       {smallDetails.length > 0 && (
-        <div
-          style={{
-            backgroundColor: "rgb(48, 48, 48, 0.65)",
-            backdropFilter: "blur(6px)",
-            padding: "6px",
-            borderRadius: "6px",
-            display: "flex",
-            margin: "12px",
-            zIndex: 2,
-            gap: "6px",
-            flexDirection: "row",
-            position: "absolute",
-            top: 0,
-            right: 0,
-          }}
-        >
+        <CardIconContainer>
           {smallDetails.map(([name, details]) => (
             <CardIcon
               icon={details.icon}
@@ -56,7 +43,7 @@ const Card = ({ item }: Props) => {
               key={name}
             />
           ))}
-        </div>
+        </CardIconContainer>
       )}
 
       <div
@@ -77,7 +64,13 @@ const Card = ({ item }: Props) => {
           }}
         />
       </div>
-      <div style={{ display: "flex", gap: "4px", flexDirection: "column" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "4px",
+          flexDirection: "column",
+        }}
+      >
         <div>
           <h3
             style={{
@@ -91,24 +84,13 @@ const Card = ({ item }: Props) => {
           >
             {item.name}
           </h3>
-          <div
-            style={{
-              fontSize: "13px",
-              display: "flex",
-              flexDirection: "row",
-              gap: "4px",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Image
-              src={item.rarity.icon}
-              height={16}
-              width={16}
-              alt={item.rarity.value}
-            />
-            <p>{item.rarity.value}</p>
-          </div>
+          {Object.keys(item.informativeDetails).length > 0 && (
+            <CardValueContainer>
+              {Object.entries(item.informativeDetails).map(([name, data]) => (
+                <CardValue {...data} key={name} />
+              ))}
+            </CardValueContainer>
+          )}
         </div>
         <div
           style={{
