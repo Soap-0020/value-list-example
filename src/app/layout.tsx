@@ -3,6 +3,7 @@ import Navbar from "../components/navbar";
 import { Poppins } from "next/font/google";
 
 import "../css/global.css";
+import icon from "../public/icon.png";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700", "800"],
@@ -13,6 +14,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Spongebob Tower Defence Values",
   description: "The best value list!",
+  icons: icon.src,
 };
 
 export default function RootLayout({
