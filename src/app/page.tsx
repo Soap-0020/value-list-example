@@ -5,11 +5,21 @@ import getPages from "../config/getPages";
 import sortingConfig from "../config/sorting";
 import getStatistics from "../config/getStatistics";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+
+import icon from "../public/icon.png";
 
 type Props = {
   searchParams: Promise<{
     [key: string]: string | undefined;
   }>;
+};
+
+// Edit for your branding
+export const metadata: Metadata = {
+  title: "Spongebob Tower Defence Values",
+  description: "The best value list!",
+  icons: icon.src,
 };
 
 export default async function Home({ searchParams }: Props) {
