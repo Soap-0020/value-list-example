@@ -110,7 +110,7 @@ export default function ClientItemPage({
             <div
               style={{
                 display: "flex",
-                gap: "1px",
+                gap: "2px",
                 flexDirection: "column",
               }}
             >

@@ -15,7 +15,7 @@ const HorizontalScroll = ({ children }: Container) => {
       element.scrollLeft += event.deltaY;
     };
 
-    element.addEventListener("wheel", onWheel, { passive: true });
+    element.addEventListener("wheel", onWheel);
     return () => element.removeEventListener("wheel", onWheel);
   }, []);
 
@@ -25,6 +25,7 @@ const HorizontalScroll = ({ children }: Container) => {
       style={{
         overflowX: "auto",
         overflowY: "visible",
+        whiteSpace: "nowrap",
       }}
     >
       {children}
