@@ -35,7 +35,6 @@ export default function ClientIndex({
   statistics,
 }: Props) {
   const searchParams = useSearchParams();
-
   const [currentSearch, setCurrentSearch] = useState(search);
 
   return (

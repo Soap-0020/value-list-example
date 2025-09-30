@@ -26,7 +26,7 @@ const getItems = async (): Promise<Item[]> => {
   const json = await data.json();
 
   return json.map((data: any) => {
-    const demandValue = parseFloat(data.demand?.split("/")[0]);
+    const demandValue = parseInt(data.demand?.split("/")[0]);
     const demand = Number.isNaN(demandValue) ? null : demandValue;
 
     const id = data.title.replaceAll(" ", "-");

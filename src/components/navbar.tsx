@@ -1,3 +1,4 @@
+// Coming soon
 const Navbar = () => {
   return <p></p>;
 };

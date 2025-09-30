@@ -29,7 +29,6 @@ export default async function ItemPage({
   }>;
 }) {
   const { id } = await params;
-
   const item = await getItem(decodeURIComponent(id));
 
   const [itemVariants, similarItems] = await Promise.all([
