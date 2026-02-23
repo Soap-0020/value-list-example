@@ -2,7 +2,7 @@
 import { Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
 import Item from "../types/item";
 import { AutoSizer } from "react-virtualized";
-import formatValue from "../functions/formatValue";
+import formatValue from "../config/formatValue";
 import Image from "next/image";
 
 type Props = {

@@ -1,4 +1,4 @@
-import formatValue from "@/src/functions/formatValue";
+import formatValue from "@/src/config/formatValue";
 import Icon from "@/src/types/icon";
 import Image from "next/image";
 

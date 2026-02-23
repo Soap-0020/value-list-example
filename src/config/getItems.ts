@@ -21,7 +21,7 @@ import gamepassIcon from "../public/gamepass.webp";
 const getItems = async (): Promise<Item[]> => {
   // Example of implementation for https://www.valuevaultx.com/spongebob-tower-defense
   const data = await fetch(
-    "https://valuevaultx.com/_functions/api/SpongeBobTowerDefense"
+    "https://valuevaultx.com/_functions/api/SpongeBobTowerDefense",
   );
   const json = await data.json();
 
@@ -46,8 +46,8 @@ const getItems = async (): Promise<Item[]> => {
             variant == "Normal"
               ? normalIcon
               : variant == "Shiny"
-              ? shinyIcon
-              : wumboIcon,
+                ? shinyIcon
+                : wumboIcon,
         },
 
         ["Rarity"]: {
@@ -94,10 +94,10 @@ const getItems = async (): Promise<Item[]> => {
           icon: !demand
             ? questionMarkIcon
             : demand > 6
-            ? greenUpArrowIcon
-            : demand > 4
-            ? redUpArrowIcon
-            : redStraightDownArrowIcon,
+              ? greenUpArrowIcon
+              : demand > 4
+                ? redUpArrowIcon
+                : redStraightDownArrowIcon,
 
           value: demand ? `${demand}/10` : null,
         },

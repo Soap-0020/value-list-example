@@ -12,8 +12,8 @@ export async function generateMetadata({
   }>;
 }): Promise<Metadata> {
   const { id } = await params;
-
   const item = await getItem(decodeURIComponent(id));
+
   return {
     icons: item.image,
     title: item.name,

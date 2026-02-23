@@ -1,4 +1,4 @@
-import isUnderfinedOrNull from "./isUndefinedOrNull";
+import isUnderfinedOrNull from "../functions/isUndefinedOrNull";
 
 const numberFormats = {
   [""]: 1,

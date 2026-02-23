@@ -1,5 +1,5 @@
 import Icon from "@/src/types/icon";
-import formatValue from "../../functions/formatValue";
+import formatValue from "../../config/formatValue";
 import Image from "next/image";
 
 type Props = {
